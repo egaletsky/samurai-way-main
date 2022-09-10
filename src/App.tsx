@@ -10,12 +10,21 @@ function hello() {
 hello()
 
 function App() {
-  return (
-    <div className="App">
-     Hello, samurai! Let's go!!!
-        <Rating/>
-    </div>
-  );
+    console.log('1')
+    return (
+        <div className="App">
+            Hello, samurai! Let's go!!!
+            <Header/>
+            <Rating/>
+        </div>
+    );
+}
+
+
+function Header() {
+    return (
+        <>This is header!</>
+    );
 }
 
 function Rating() {
@@ -37,4 +46,5 @@ function Star() {
         </div>
     );
 }
+
 export default App;
