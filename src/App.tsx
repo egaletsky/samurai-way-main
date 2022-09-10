@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import './components/Accordion/Accordion';
 import Accordion from "./components/Accordion/Accordion";
-
+import {Rating} from "./components/Rating/Rating";
 
 
 function App() {
@@ -10,40 +10,27 @@ function App() {
     return (
         <div className="App">
             Hello, samurai! Let's go!!!
-            <Header/>
-            <Rating/>
+         Article 1
+            <Rating stars ={3}/>
+
+
+
+            Article 222
+
+
             <Accordion/>
         </div>
     );
 }
 
 
-function Header() {
+function PageTitle(props: any) {
     return (
-        <>This is header!</>
+        <h1>{props.title}</h1>
+
     );
 }
 
 
-
-function Rating() {
-    return (
-        <div>
-            <Star/>
-            <Star/>
-            <Star/>
-            <Star/>
-            <Star/>
-        </div>
-    );
-}
-
-function Star() {
-    return (
-        <div>
-            <div>*Star*</div>
-        </div>
-    );
-}
 
 export default App;
