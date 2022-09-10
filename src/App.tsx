@@ -1,13 +1,9 @@
 import React from 'react';
 import './App.css';
+import './components/Accordion/Accordion';
+import Accordion from "./components/Accordion/Accordion";
 
 
-function hello() {
-    //debugger
-    alert('Hello !!')
-}
-
-hello()
 
 function App() {
     console.log('1')
@@ -16,6 +12,7 @@ function App() {
             Hello, samurai! Let's go!!!
             <Header/>
             <Rating/>
+            <Accordion/>
         </div>
     );
 }
@@ -26,6 +23,8 @@ function Header() {
         <>This is header!</>
     );
 }
+
+
 
 function Rating() {
     return (
