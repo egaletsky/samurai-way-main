@@ -3,8 +3,6 @@ import './App.css';
 import './components/Accordion/Accordion';
 import './Technologies'
 import './Header'
-import Accordion from "./components/Accordion/Accordion";
-import {Rating} from "./components/Rating/Rating";
 import Technologies from "./Technologies";
 import Header from "./Header";
 
