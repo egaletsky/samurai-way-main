@@ -1,6 +1,10 @@
 import React from "react";
 
-export function Rating(props:any) {
+type RatingPropsType = {
+    stars: number;
+}
+
+export function Rating(props:RatingPropsType) {
    debugger
    switch (props.stars ) {
        case 1:{
