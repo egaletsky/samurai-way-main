@@ -17,6 +17,7 @@ const App = () => {
                 <div><a>Music</a></div>
                 <div><a>Settings</a></div>
 
+
             </nav>
             <div className="content">
                 <img src ="https://tinypng.com/images/social/website.jpg"/>
