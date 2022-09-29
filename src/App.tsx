@@ -1,44 +1,30 @@
 import React from 'react';
 import './App.css';
-import './components/Accordion/Accordion';
-import './Technologies'
-import './Header'
-import Technologies from "./Technologies";
-import Header from "./Header";
-
-
 
 
 const App = () => {
 
     return (
-        <div className="App">
-            Simple HTML
-            <Header/>
-            <Technologies/>
+        <div className="app-wrapper">
+            <header className="header">
+                <img
+                    src="https://image.shutterstock.com/image-vector/website-header-banner-design-abstract-600w-1922131178.jpg"/>
+            </header>
+            <nav className="nav">
+                <div><a>Profile</a></div>
+                <div><a>Messages</a></div>
+                <div><a>News</a></div>
+                <div><a>Music</a></div>
+                <div><a>Settings</a></div>
+
+            </nav>
+            <div className="content">
+                <img src ="https://tinypng.com/images/social/website.jpg"/>
+                Main content
+            </div>
         </div>
     );
 }
-
-
-
-
-/*
-console.log('1')
-return (
-<div className="App">
-Hello, samurai! Let's go!!!
-Article 1
-<Rating stars ={3}/>
-Article 222
-<Accordion title = {'Menu'}/>
-<Accordion title = {'Users'}/>
-</div>
-);
-}
-
-
-*/
 
 
 function PageTitle(props: any) {
