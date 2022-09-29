@@ -10,21 +10,4 @@
     grid-gap: 10px;
 }
 
-.nav {
-    grid-area: n;
-    background-color: greenyellow;
-}
 
-.header {
-    grid-area: h;
-    background-color: burlywood;
-}
-
-
-.header img{
-    height: 60px;
-}
-.content {
-    grid-area: c;
-    background-color: palevioletred;
-}
