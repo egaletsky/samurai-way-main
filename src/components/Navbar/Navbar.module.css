@@ -2,6 +2,10 @@
     grid-area: n;
     background-color: greenyellow;
 }
-.item{
-    color: honeydew;
+.item a {
+    color: red;
+    text-decoration: none;
+}
+.item a.activeLink{
+    color: gold;
 }
