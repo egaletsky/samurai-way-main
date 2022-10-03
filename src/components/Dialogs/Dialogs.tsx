@@ -22,17 +22,46 @@ type MessageType = {
     text: string
 }
 
-export const Message = (props:MessageType) =>{
-    return(
+export const Message = (props: MessageType) => {
+    return (
         <div className={s.dialog}>{props.text}</div>
     )
 }
 
+type DialogsDataType = {
+    id: number
+    name: string
+}
+
+type MessageDateType = {
+    message: string
+    id: number
+}
+
+
 export const Dialogs = () => {
+
+    let dialogsData: DialogsDataType[] = [
+        {id: 1, name: 'Dimych'},
+        {id: 2, name: 'Andrey'},
+        {id: 3, name: 'Sveta'},
+        {id: 4, name: 'Sasha'},
+        {id: 5, name: 'Olga'},
+        {id: 6, name: 'Roman'},
+    ]
+
+
+    let messageData: MessageDateType[] = [
+        {id: 1, message: 'hi'},
+        {id: 2, message: 'how is your'},
+        {id: 3, message: 'yo'},
+
+    ]
+
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogItems}>
-
 
                 <DialogItem name="Dimych" id="1"/>
                 <DialogItem name="Andrey" id="2"/>
@@ -41,13 +70,11 @@ export const Dialogs = () => {
                 <DialogItem name="Olga" id="5"/>
                 <DialogItem name="Roman" id="6"/>
 
-
-
             </div>
             <div className={s.messages}>
-                <Message text = "hi"/>
-                <Message text = "how is your"/>
-                <Message text = "yo"/>
+                <Message text="hi"/>
+                <Message text="how is your"/>id:1
+                <Message text="yo"/>
 
             </div>
         </div>
