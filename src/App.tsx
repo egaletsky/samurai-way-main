@@ -5,18 +5,16 @@ import {Navbar} from './components/Navbar/Navbar';
 import {Profile} from './components/Profile/Profile';
 import {Dialogs} from './components/Dialogs/Dialogs';
 import {BrowserRouter, Route} from 'react-router-dom';
-import {DialogsDataType, MessageDateType, PostDataType} from './index';
+import {stateType} from './redux/state';
 
 
 
 type AppType = {
-    posts: PostDataType[]
-    dialogs: DialogsDataType[]
-    messages: MessageDateType[]
+    state: stateType
 }
 
 
-const App = (props:AppType) => {
+export const App = (props:AppType) => {
 
 
 
@@ -31,9 +29,9 @@ const App = (props:AppType) => {
 
                     {/*<Route path ='/profile' component={Profile}/>
                     <Route path ='/dialogs' component={Dialogs}/>*/}
+                    <Route path ='/dialogs' render={() => <Dialogs state ={props.state.dialogPage} /> }/>
+                    <Route path ='/profile' render={() => <Profile state ={props.state.profilePage} /> }/>
 
-                    <Route path ='/profile' render={() => <Profile posts ={props.posts} /> }/>
-                    <Route path ='/dialogs' render={() => <Dialogs dialogs ={props.dialogs} messages={props.messages}/> }/>
 
                 </div>
 
@@ -43,12 +41,3 @@ const App = (props:AppType) => {
 }
 
 
-function PageTitle(props: any) {
-    return (
-        <h1>{props.title}</h1>
-
-    );
-}
-
-
-export default App;

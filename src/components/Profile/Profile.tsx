@@ -3,10 +3,11 @@ import './Profile.module.css'
 import s from './Profile.module.css';
 import {MyPosts} from './MyPosts/MyPosts';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
-import {PostDataType} from '../../index';
+import {PostDataType, profilePageType} from '../../redux/state';
+
 
 type ProfileType = {
-    posts: PostDataType[]
+    state: profilePageType
 }
 
 
@@ -19,7 +20,7 @@ export const Profile = (props:ProfileType) => {
         <div className={s.content}>
 
             <ProfileInfo/>
-            <MyPosts posts = {props.posts}/>
+            <MyPosts posts = {props.state.posts}/>
 
         </div>
     );
