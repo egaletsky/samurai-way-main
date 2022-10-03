@@ -5,9 +5,21 @@ import {Navbar} from './components/Navbar/Navbar';
 import {Profile} from './components/Profile/Profile';
 import {Dialogs} from './components/Dialogs/Dialogs';
 import {BrowserRouter, Route} from 'react-router-dom';
+import {DialogsDataType, MessageDateType, PostDataType} from './index';
 
 
-const App = () => {
+
+type AppType = {
+    posts: PostDataType[]
+    dialogs: DialogsDataType[]
+    messages: MessageDateType[]
+}
+
+
+const App = (props:AppType) => {
+
+
+
 
     return (
         <BrowserRouter>
@@ -20,8 +32,8 @@ const App = () => {
                     {/*<Route path ='/profile' component={Profile}/>
                     <Route path ='/dialogs' component={Dialogs}/>*/}
 
-                    <Route path ='/profile' render={() => <Profile/> }/>
-                    <Route path ='/dialogs' render={() => <Dialogs/> }/>
+                    <Route path ='/profile' render={() => <Profile posts ={props.posts} /> }/>
+                    <Route path ='/dialogs' render={() => <Dialogs dialogs ={props.dialogs} messages={props.messages}/> }/>
 
                 </div>
 
