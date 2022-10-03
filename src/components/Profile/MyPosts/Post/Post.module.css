@@ -4,3 +4,8 @@
     color: darkblue;
 }
 
+.item img {
+
+    width: 50px;
+    border-radius: 50%;
+}

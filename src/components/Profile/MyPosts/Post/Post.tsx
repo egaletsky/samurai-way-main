@@ -5,7 +5,8 @@ export const Post = () => {
     return (
 
         <div className={s.item}>
-            11111
+            lorem ipsum
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Circle-icons-image.svg" alt="ava"/>
         </div>
 
     );
