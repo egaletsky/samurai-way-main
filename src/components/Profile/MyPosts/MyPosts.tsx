@@ -17,6 +17,9 @@ export const MyPosts = () => {
         {id: 3, message: 'post 3 yo', likesCount:6},
     ]
 
+let posts = postData.map(el => <Post message={el.message} key ={el.id}  likesCount={el.likesCount}/> )
+
+
 
     return (
 
@@ -34,10 +37,7 @@ export const MyPosts = () => {
 
             <div className={s.posts}>
 
-                <Post message="Hi, how are you?"/>
-                <Post message="It is my first post"/>
-                <Post/>
-                <Post/>
+                {posts}
 
             </div>
 
