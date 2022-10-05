@@ -4,19 +4,24 @@ import {Post} from './Post/Post';
 import {PostDataType} from '../../../redux/state';
 
 
-
-
 type MyPostsType = {
     posts: PostDataType[]
+    addPost:(postMessage:string)=>void
 }
 
-export const MyPosts = (props:MyPostsType) => {
+export const MyPosts = (props: MyPostsType) => {
 
 
+    let posts = props.posts.map(el => <Post message={el.message} key={el.id} likesCount={el.likesCount}/>)
+    let newPostElement = React.createRef<HTMLTextAreaElement>();
 
-let posts = props.posts.map(el => <Post message={el.message} key ={el.id}  likesCount={el.likesCount}/> )
-
-
+    let addPost = () => {
+      debugger;
+        if(newPostElement.current){
+            alert(newPostElement.current.value)
+            props.addPost(newPostElement.current.value)
+        }
+    }
 
     return (
 
@@ -25,10 +30,10 @@ let posts = props.posts.map(el => <Post message={el.message} key ={el.id}  likes
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea></textarea>
+                    <textarea ref ={newPostElement}></textarea>
                 </div>
                 <div>
-                    <button>Add post</button>
+                    <button onClick={addPost}>Add post</button>
                 </div>
             </div>
 
