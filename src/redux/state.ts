@@ -1,4 +1,17 @@
-import {rerenderEntireTree} from '../render';
+
+
+
+let onChange =()=>{
+    console.log('state is change')
+}
+
+
+export const subscribe = (callback:()=>void) =>{
+    onChange = callback
+}
+
+
+
 
 export type PostDataType = {
     message: string
@@ -13,18 +26,15 @@ export type MessageDateType = {
     message: string
     id: number
 }
-
 export type stateType = {
     profilePage: profilePageType
     dialogPage: dialogPageType
 }
-
 export type profilePageType = {
     posts: PostDataType[]
     newPostText:string
 
 }
-
 export type dialogPageType = {
     messages: MessageDateType[]
     dialogs: DialogsDataType[]
@@ -71,10 +81,10 @@ export let addPost = () =>{
     state.profilePage.posts.push(newPost)
     state.profilePage.newPostText = ''
     console.log(state);
-    rerenderEntireTree(state)
+    onChange()
 }
 
 export let updateNewPostText = (newText:string) =>{
     state.profilePage.newPostText = newText
-    rerenderEntireTree(state)
+    onChange()
 }
