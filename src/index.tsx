@@ -9,14 +9,11 @@ import './index.css';
 import {App} from './App';
 
 
-
-
-let rerenderEntireTree = () =>{
+let rerenderEntireTree = () => {
 
     ReactDOM.render(
-        <App state = {store.getState()}
-             addPost={store.addPost.bind(store)}
-             updateNewPostText={store.updateNewPostText.bind(store)}/>,
+        <App state={store.getState()}
+             dispatch={store.dispatch.bind(store)}/>,
         document.getElementById('root')
     );
 
@@ -25,7 +22,6 @@ let rerenderEntireTree = () =>{
 
 
 store.subscribe(rerenderEntireTree)
-
 
 
 rerenderEntireTree()

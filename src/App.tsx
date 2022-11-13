@@ -5,16 +5,15 @@ import {Navbar} from './components/Navbar/Navbar';
 import {Profile} from './components/Profile/Profile';
 import {Dialogs} from './components/Dialogs/Dialogs';
 import {BrowserRouter, Route} from 'react-router-dom';
-import {stateType} from './redux/state';
+import {ActionsTypes, stateType} from './redux/state';
 
 type AppType = {
     state: stateType
-    addPost:()=>void
-    updateNewPostText:(s:string)=>void
+    dispatch: (action: ActionsTypes) => void
 }
 
 
-export const App = (props:AppType) => {
+export const App = (props: AppType) => {
 
     return (
         <BrowserRouter>
@@ -25,11 +24,11 @@ export const App = (props:AppType) => {
                 <div className="app-wrapper-content">
 
 
-                    <Route path ='/dialogs' render={() => <Dialogs state ={props.state.dialogPage} /> }/>
-                    <Route path ='/profile' render={() =>
-                        <Profile profilePage ={props.state.profilePage}
-                                 addPost={props.addPost}
-                                 updateNewPostText={props.updateNewPostText}/>
+                    <Route path="/dialogs" render={() => <Dialogs state={props.state.dialogPage}/>}/>
+                    <Route path="/profile" render={() =>
+                        <Profile profilePage={props.state.profilePage}
+                                 dispatch={props.dispatch}
+                        />
                     }/>
 
 
