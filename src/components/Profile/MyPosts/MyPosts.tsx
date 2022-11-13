@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import {Post} from './Post/Post';
-import {PostDataType, updateNewPostText} from '../../../redux/state';
+import {PostDataType} from '../../../redux/state';
 
 
 type MyPostsType = {
@@ -23,6 +23,7 @@ export const MyPosts = (props: MyPostsType) => {
     }
 
     let onPostChange = () => {
+
         let text = newPostElement.current?.value
         if(text) {
             props.updateNewPostText(text)
