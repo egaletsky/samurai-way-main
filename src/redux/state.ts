@@ -50,7 +50,6 @@ type ChangeNewTextActionType = {
     newText: string
 }
 
-export type ActionsTypes = AddPostActionType | ChangeNewTextActionType
 
 let store: StoreType = {
     _state: {
@@ -121,59 +120,20 @@ let store: StoreType = {
 
 
 //window.store = store
+export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewTextAC>
 
-/*
-export let state: stateType = {
-    profilePage: {
-        posts: [
-            {id: 1, message: 'post 1 hi', likesCount: 23},
-            {id: 2, message: 'post2 how is your', likesCount: 13},
-            {id: 3, message: 'post 3 yo', likesCount: 6},
-        ],
-        newPostText:'it-kamasutra'
-    },
-    dialogPage: {
-        messages: [
-            {id: 1, message: 'hi'},
-            {id: 2, message: 'how is your'},
-            {id: 3, message: 'yo'},
+export const addPostAC = (postText: string) => {
+    return {
+        type: 'ADD-POST',
+        postText: postText
+    } as const
+}
 
-        ],
-        dialogs: [
-            {id: 1, name: 'Dimych'},
-            {id: 2, name: 'Andrey'},
-            {id: 3, name: 'Sveta'},
-            {id: 4, name: 'Sasha'},
-            {id: 5, name: 'Olga'},
-            {id: 6, name: 'Roman'},
-            {id: 7, name: 'Taras'},
-        ],
-    }
-
+export const changeNewTextAC = (newText: string) => {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT',
+        newText: newText
+    } as const
 }
-let onChange =()=>{
-    console.log('state is change')
-}
-export const subscribe = (callback:()=>void) =>{
-    onChange = callback
-}
-export let addPost = () =>{
-
-    const newPost:PostDataType = {
-        id:5,
-        message: state.profilePage.newPostText,
-        likesCount:0,
-    }
-
-    state.profilePage.posts.push(newPost)
-    state.profilePage.newPostText = ''
-    console.log(state);
-    onChange()
-}
-export let updateNewPostText = (newText:string) =>{
-    state.profilePage.newPostText = newText
-    onChange()
-}
-*/
 
 export default store
