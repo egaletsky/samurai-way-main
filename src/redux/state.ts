@@ -1,4 +1,7 @@
 import {v1} from 'uuid';
+import {addPostAC, changeNewTextAC, profileReducer} from './profile-reducer';
+import {changeNewMessageAC, dialogReducer, sendMessageAC} from './dialog-reducer';
+import {sidebarReducer} from './sidebar-reducer';
 
 
 export type PostDataType = {
@@ -17,6 +20,7 @@ export type MessageDateType = {
 export type stateType = {
     profilePage: profilePageType
     dialogPage: dialogPageType
+    sidebar: {}
 }
 export type profilePageType = {
     posts: PostDataType[]
@@ -90,7 +94,8 @@ let store: StoreType = {
 
             newMessageBody: ''
 
-        }
+        },
+        sidebar: {}
 
     },
     _onCallSubscriber() {
@@ -106,39 +111,12 @@ let store: StoreType = {
 
 
     dispatch(action: ActionsTypes) {
-        if (action.type === 'ADD-POST') {
 
-            const newPost: PostDataType = {
-                id: v1(),
-                message: this._state.profilePage.newPostText,
-                likesCount: 0,
-            }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogPage = dialogReducer(this._state.dialogPage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
 
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPostText = ''
-            console.log(this._state);
-            this._onCallSubscriber()
-
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-
-            if (action.newText != null) {
-                this._state.profilePage.newPostText = action.newText
-            }
-            this._onCallSubscriber()
-
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {
-
-            if (action.newMessageBody != null) {
-                this._state.dialogPage.newMessageBody = action.newMessageBody
-            }
-            this._onCallSubscriber()
-        } else if (action.type === 'SEND-MESSAGE') {
-            let body = this._state.dialogPage.newMessageBody
-
-            this._state.dialogPage.newMessageBody = ''
-            this._state.dialogPage.messages.push({id: 6, message: body})
-            this._onCallSubscriber()
-        }
+        this._onCallSubscriber()
 
     }
 
@@ -151,34 +129,6 @@ export type ActionsTypes =
     | ReturnType<typeof changeNewTextAC>
     | ReturnType<typeof sendMessageAC>
     | ReturnType<typeof changeNewMessageAC>
-
-export const addPostAC = (postText: string) => {
-    return {
-        type: 'ADD-POST',
-        postText: postText
-    } as const
-}
-
-export const changeNewTextAC = (newText1: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newText: newText1
-    } as const
-}
-
-export const changeNewMessageAC = (newMessageBody: string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-BODY',
-        newMessageBody: newMessageBody
-    } as const
-}
-
-export const sendMessageAC = () => {
-    return {
-        type: 'SEND-MESSAGE'
-
-    } as const
-}
 
 
 export default store

@@ -5,12 +5,13 @@ import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
 import store, {
     ActionsTypes,
-    changeNewMessageAC,
+
     dialogPageType,
     DialogsDataType,
     MessageDateType,
-    sendMessageAC
+
 } from '../../redux/state';
+import {changeNewMessageAC, sendMessageAC} from '../../redux/dialog-reducer';
 
 
 type DialogsType = {
