@@ -26,6 +26,7 @@ export type profilePageType = {
 export type dialogPageType = {
     messages: MessageDateType[]
     dialogs: DialogsDataType[]
+    newMessageBody: string
 }
 
 
@@ -40,16 +41,25 @@ export type StoreType = {
 }
 
 
-type AddPostActionType = {
-    type: 'ADD-POST'
-    postText: string
-}
-
-type ChangeNewTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
-
+// type AddPostActionType = {
+//     type: 'ADD-POST'
+//     postText: string
+// }
+//
+// type ChangeNewTextActionType = {
+//     type: 'UPDATE-NEW-POST-TEXT'
+//     newText: string
+// }
+//
+// type ChangeNewMessageActionType = {
+//     type: 'UPDATE-NEW-MESSAGE-BODY'
+//     newMessageBody: string
+// }
+//
+// type SendMessageActionType = {
+//     type: 'SEND-MESSAGE'
+//
+// }
 
 let store: StoreType = {
     _state: {
@@ -77,6 +87,9 @@ let store: StoreType = {
                 {id: 6, name: 'Roman'},
                 {id: 7, name: 'Taras'},
             ],
+
+            newMessageBody: ''
+
         }
 
     },
@@ -92,7 +105,7 @@ let store: StoreType = {
     },
 
 
-    dispatch(action: AddPostActionType | ChangeNewTextActionType) {
+    dispatch(action: ActionsTypes) {
         if (action.type === 'ADD-POST') {
 
             const newPost: PostDataType = {
@@ -112,6 +125,19 @@ let store: StoreType = {
                 this._state.profilePage.newPostText = action.newText
             }
             this._onCallSubscriber()
+
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {
+
+            if (action.newMessageBody != null) {
+                this._state.dialogPage.newMessageBody = action.newMessageBody
+            }
+            this._onCallSubscriber()
+        } else if (action.type === 'SEND-MESSAGE') {
+            let body = this._state.dialogPage.newMessageBody
+
+            this._state.dialogPage.newMessageBody = ''
+            this._state.dialogPage.messages.push({id: 6, message: body})
+            this._onCallSubscriber()
         }
 
     }
@@ -120,7 +146,11 @@ let store: StoreType = {
 
 
 //window.store = store
-export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewTextAC>
+export type ActionsTypes =
+    ReturnType<typeof addPostAC>
+    | ReturnType<typeof changeNewTextAC>
+    | ReturnType<typeof sendMessageAC>
+    | ReturnType<typeof changeNewMessageAC>
 
 export const addPostAC = (postText: string) => {
     return {
@@ -129,11 +159,26 @@ export const addPostAC = (postText: string) => {
     } as const
 }
 
-export const changeNewTextAC = (newText: string) => {
+export const changeNewTextAC = (newText1: string) => {
     return {
         type: 'UPDATE-NEW-POST-TEXT',
-        newText: newText
+        newText: newText1
     } as const
 }
+
+export const changeNewMessageAC = (newMessageBody: string) => {
+    return {
+        type: 'UPDATE-NEW-MESSAGE-BODY',
+        newMessageBody: newMessageBody
+    } as const
+}
+
+export const sendMessageAC = () => {
+    return {
+        type: 'SEND-MESSAGE'
+
+    } as const
+}
+
 
 export default store

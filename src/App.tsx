@@ -5,7 +5,7 @@ import {Navbar} from './components/Navbar/Navbar';
 import {Profile} from './components/Profile/Profile';
 import {Dialogs} from './components/Dialogs/Dialogs';
 import {BrowserRouter, Route} from 'react-router-dom';
-import {ActionsTypes, stateType} from './redux/state';
+import store, {ActionsTypes, stateType} from './redux/state';
 
 type AppType = {
     state: stateType
@@ -24,7 +24,11 @@ export const App = (props: AppType) => {
                 <div className="app-wrapper-content">
 
 
-                    <Route path="/dialogs" render={() => <Dialogs state={props.state.dialogPage}/>}/>
+                    <Route path="/dialogs" render={() =>
+                        <Dialogs state={props.state.dialogPage}
+                                 dispatch={props.dispatch}
+                        />}
+                    />
                     <Route path="/profile" render={() =>
                         <Profile profilePage={props.state.profilePage}
                                  dispatch={props.dispatch}

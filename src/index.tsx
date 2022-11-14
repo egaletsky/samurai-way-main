@@ -1,4 +1,4 @@
-import store, {stateType} from './redux/state';
+import store from './redux/state';
 
 
 import React from 'react';
@@ -13,7 +13,8 @@ let rerenderEntireTree = () => {
 
     ReactDOM.render(
         <App state={store.getState()}
-             dispatch={store.dispatch.bind(store)}/>,
+             dispatch={store.dispatch.bind(store)}
+        />,
         document.getElementById('root')
     );
 
