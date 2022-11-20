@@ -1,4 +1,5 @@
-import store from './redux/state';
+//import store from './redux/store';
+import store from './redux/redux-store';
 
 
 import React from 'react';
@@ -12,8 +13,7 @@ import {App} from './App';
 let rerenderEntireTree = () => {
 
     ReactDOM.render(
-        <App state={store.getState()}
-             dispatch={store.dispatch.bind(store)}
+        <App store={store}
         />,
         document.getElementById('root')
     );

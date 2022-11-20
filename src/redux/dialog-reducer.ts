@@ -1,7 +1,27 @@
-import {ActionsTypes, dialogPageType, PostDataType} from './state';
+import {ActionsTypes, dialogPageType, PostDataType} from './store';
 import {v1} from 'uuid';
 
-export const dialogReducer = (state: dialogPageType, action: ActionsTypes) => {
+let initialState = {
+    messages: [
+        {id: 1, message: 'hi'},
+        {id: 2, message: 'how is your'},
+        {id: 3, message: 'yo'},
+
+    ],
+    dialogs: [
+        {id: 1, name: 'Dimych'},
+        {id: 2, name: 'Andrey'},
+        {id: 3, name: 'Sveta'},
+        {id: 4, name: 'Sasha'},
+        {id: 5, name: 'Olga'},
+        {id: 6, name: 'Roman'},
+        {id: 7, name: 'Taras'},
+    ],
+
+    newMessageBody: ''
+}
+
+export const dialogReducer = (state: dialogPageType = initialState, action: ActionsTypes) => {
 
     switch (action.type) {
         case 'UPDATE-NEW-MESSAGE-BODY':

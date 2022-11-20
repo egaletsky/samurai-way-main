@@ -1,7 +1,17 @@
 import {v1} from 'uuid';
-import {ActionsTypes, PostDataType, profilePageType} from './state';
+import {ActionsTypes, PostDataType, profilePageType} from './store';
 
-export const profileReducer = (state: profilePageType, action: ActionsTypes) => {
+let initialState = {
+    posts: [
+        {id: v1(), message: 'post 1 hi', likesCount: 23},
+        {id: v1(), message: 'post2 how is your', likesCount: 13},
+        {id: v1(), message: 'post 3 yo', likesCount: 6},
+    ],
+    newPostText: 'it-kamasutra'
+}
+
+
+export const profileReducer = (state: profilePageType = initialState, action: ActionsTypes) => {
 
 
     switch (action.type) {
@@ -9,7 +19,7 @@ export const profileReducer = (state: profilePageType, action: ActionsTypes) => 
             const newPost: PostDataType = {
                 id: v1(),
                 message: state.newPostText,
-                likesCount: 0,
+                likesCount: 9999,
             }
             state.posts.push(newPost)
             state.newPostText = ''

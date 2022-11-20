@@ -3,38 +3,40 @@ import s from './Dialogs.module.css'
 import {NavLink} from 'react-router-dom';
 import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
-import store, {
+import {
     ActionsTypes,
 
     dialogPageType,
     DialogsDataType,
     MessageDateType,
 
-} from '../../redux/state';
+} from '../../redux/store';
 import {changeNewMessageAC, sendMessageAC} from '../../redux/dialog-reducer';
 
 
 type DialogsType = {
-    state: dialogPageType
-    dispatch: (action: ActionsTypes) => void
+    dialogPage: dialogPageType
+    upDateNewMessagesBody: (text: string) => void
+    sendMessage: () => void
+
 }
 
 
 export const Dialogs = (props: DialogsType) => {
 
+    let state = props.dialogPage
 
-    let dialogsElements = props.state.dialogs.map(el => <DialogItem name={el.name} id={el.name}/>)
-    let messageElements = props.state.messages.map(el => <Message text={el.message}/>)
-    let newMessageBody = props.state.newMessageBody
+    let dialogsElements = state.dialogs.map(el => <DialogItem name={el.name} id={el.name}/>)
+    let messageElements = state.messages.map(el => <Message text={el.message}/>)
+    let newMessageBody = state.newMessageBody
 
     let onSendMessageClick = () => {
-        props.dispatch(sendMessageAC())
+        props.sendMessage()
     }
 
     let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.target.value
-        props.dispatch(changeNewMessageAC(body))
-
+        props.upDateNewMessagesBody(body)
     }
 
 
