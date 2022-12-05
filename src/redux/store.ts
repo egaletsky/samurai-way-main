@@ -133,3 +133,6 @@ export type ActionsTypes =
 
 
 //export default store
+
+//@ts-ignore
+//window.store = store

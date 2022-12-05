@@ -12,17 +12,10 @@ import {
 
 } from '../../redux/store';
 import {changeNewMessageAC, sendMessageAC} from '../../redux/dialog-reducer';
+import {DialogsPropsType} from './DialogsContainer';
 
 
-type DialogsType = {
-    dialogPage: dialogPageType
-    upDateNewMessagesBody: (text: string) => void
-    sendMessage: () => void
-
-}
-
-
-export const Dialogs = (props: DialogsType) => {
+export const Dialogs = (props: DialogsPropsType) => {
 
     let state = props.dialogPage
 

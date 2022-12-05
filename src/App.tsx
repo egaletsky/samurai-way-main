@@ -7,12 +7,10 @@ import {Dialogs} from './components/Dialogs/Dialogs';
 import {BrowserRouter, Route} from 'react-router-dom';
 import {ActionsTypes, stateType} from './redux/store';
 
-import store from './redux/redux-store';
+import {store} from './redux/redux-store';
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 
-type AppType = {
-    store: typeof store
-}
+type AppType = {}
 
 
 export const App = (props: AppType) => {
@@ -27,8 +25,7 @@ export const App = (props: AppType) => {
 
 
                     <Route path="/dialogs" render={() =>
-                        <DialogsContainer store={store}
-                        />}
+                        <DialogsContainer/>}
                     />
                     <Route path="/profile" render={() =>
                         <Profile store={store}
