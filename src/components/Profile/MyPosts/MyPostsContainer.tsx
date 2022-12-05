@@ -2,7 +2,7 @@ import React from 'react';
 
 import {addPostAC, changeNewTextAC} from '../../../redux/profile-reducer';
 import {MyPosts} from './MyPosts';
-import {AppStateType, store} from '../../../redux/redux-store';
+import {AppStateType} from '../../../redux/redux-store';
 import {connect} from 'react-redux';
 
 import {Dispatch} from 'redux';
@@ -43,29 +43,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
 
 export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
 
-
-// export const MyPostsContainer = (props: MyPostsContainerType) => {
-//     let state = props.store.getState()
-//
-//     let addPost = () => {
-//         store.dispatch(addPostAC('!!!!!!!'))
-//     }
-//
-//     let onPostChange = (text: string) => {
-//         if (text) {
-//             store.dispatch(changeNewTextAC(text))
-//         }
-//     }
-//
-//     return (
-//
-//
-//         <MyPosts updateNewPostText={onPostChange}
-//                  addPost={addPost}
-//                  posts={state.profilePage.posts}
-//                  newPostText={state.profilePage.newPostText}
-//         />
-//
-//     );
-// };
 
