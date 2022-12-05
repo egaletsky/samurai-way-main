@@ -11,8 +11,8 @@ export const Dialogs = (props: DialogsPropsType) => {
 
     let state = props.dialogPage
 
-    let dialogsElements = state.dialogs.map(el => <DialogItem name={el.name} id={el.name}/>)
-    let messageElements = state.messages.map(el => <Message text={el.message}/>)
+    let dialogsElements = state.dialogs.map(el => <DialogItem name={el.name} key={el.id} id={el.name}/>)
+    let messageElements = state.messages.map(el => <Message text={el.message} key={el.id}/>)
     let newMessageBody = state.newMessageBody
 
     let onSendMessageClick = () => {
