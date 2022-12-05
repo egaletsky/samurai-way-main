@@ -4,7 +4,7 @@ import s from './Profile.module.css';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 
 import {MyPostsContainer} from './MyPosts/MyPostsContainer';
-import store from '../../redux/redux-store';
+import {store} from '../../redux/redux-store';
 
 type ProfileType = {
     store: typeof store

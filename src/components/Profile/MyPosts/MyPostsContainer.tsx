@@ -1,38 +1,71 @@
 import React from 'react';
-import {Post} from './Post/Post';
-import {ActionsTypes, PostDataType} from '../../../redux/store';
+
 import {addPostAC, changeNewTextAC} from '../../../redux/profile-reducer';
 import {MyPosts} from './MyPosts';
-import store from '../../../redux/redux-store';
+import {AppStateType, store} from '../../../redux/redux-store';
+import {connect} from 'react-redux';
+
+import {Dispatch} from 'redux';
+import {PostDataType} from '../../../redux/store';
 
 
-type MyPostsContainerType = {
-    store: typeof store
+type MapStatePropsType = {
+    posts: PostDataType[]
+    newPostText: string
+}
+type MapDispatchPropsType = {
 
+    updateNewPostText: (text: string) => void
+    addPost: () => void
 }
 
-export const MyPostsContainer = (props: MyPostsContainerType) => {
-    let state = props.store.getState()
+export type PostPropsType = MapStatePropsType & MapDispatchPropsType
 
-    let addPost = () => {
-        store.dispatch(addPostAC('!!!!!!!'))
+const mapStateToProps = (state: AppStateType): MapStatePropsType => {
+    return {
+        posts: state.profilePage.posts,
+        newPostText: state.profilePage.newPostText
     }
+}
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
+    return {
+        addPost: () => {
+            dispatch(addPostAC())
 
-    let onPostChange = (text: string) => {
-        if (text) {
-            store.dispatch(changeNewTextAC(text))
+        },
+
+        updateNewPostText: (text: string) => {
+            dispatch(changeNewTextAC(text))
         }
+
     }
+}
 
-    return (
+export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
 
 
-        <MyPosts updateNewPostText={onPostChange}
-                 addPost={addPost}
-                 posts={state.profilePage.posts}
-                 newPostText={state.profilePage.newPostText}
-        />
-
-    );
-};
+// export const MyPostsContainer = (props: MyPostsContainerType) => {
+//     let state = props.store.getState()
+//
+//     let addPost = () => {
+//         store.dispatch(addPostAC('!!!!!!!'))
+//     }
+//
+//     let onPostChange = (text: string) => {
+//         if (text) {
+//             store.dispatch(changeNewTextAC(text))
+//         }
+//     }
+//
+//     return (
+//
+//
+//         <MyPosts updateNewPostText={onPostChange}
+//                  addPost={addPost}
+//                  posts={state.profilePage.posts}
+//                  newPostText={state.profilePage.newPostText}
+//         />
+//
+//     );
+// };
 

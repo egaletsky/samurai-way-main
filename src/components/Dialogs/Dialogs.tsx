@@ -1,17 +1,9 @@
 import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
-import {NavLink} from 'react-router-dom';
+
 import {DialogItem} from './DialogItem/DialogItem';
 import {Message} from './Message/Message';
-import {
-    ActionsTypes,
 
-    dialogPageType,
-    DialogsDataType,
-    MessageDateType,
-
-} from '../../redux/store';
-import {changeNewMessageAC, sendMessageAC} from '../../redux/dialog-reducer';
 import {DialogsPropsType} from './DialogsContainer';
 
 
@@ -28,7 +20,7 @@ export const Dialogs = (props: DialogsPropsType) => {
     }
 
     let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let body = e.target.value
+        let body = e.currentTarget.value
         props.upDateNewMessagesBody(body)
     }
 

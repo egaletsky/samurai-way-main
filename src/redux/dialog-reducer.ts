@@ -1,5 +1,5 @@
-import {ActionsTypes, dialogPageType, PostDataType} from './store';
-import {v1} from 'uuid';
+import {ActionsTypes} from './store';
+
 
 export type DialogType = {
     id: number
@@ -32,22 +32,27 @@ const initialState = {
     newMessageBody: ''
 }
 
-export type InitialStateType = typeof initialState
+export type DialogInitialStateType = typeof initialState
 
 
-export const dialogReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
+export const dialogReducer = (state: DialogInitialStateType = initialState, action: ActionsTypes): DialogInitialStateType => {
 
     switch (action.type) {
         case 'UPDATE-NEW-MESSAGE-BODY':
-            if (action.newMessageBody != null) {
-                state.newMessageBody = action.newMessageBody
-            }
-            return state
+
+            return {
+                ...state,
+                newMessageBody: action.newMessageBody
+            };
+
+
         case 'SEND-MESSAGE':
-            let body = state.newMessageBody
-            state.newMessageBody = ''
-            state.messages.push({id: 6, message: body})
-            return state
+            let body = state.newMessageBody;
+            return {
+                ...state,
+                newMessageBody: '',
+                messages: [...state.messages, {id: state.messages.length + 1, message: body}]
+            };
         default:
             return state
     }
@@ -62,6 +67,7 @@ export const changeNewMessageAC = (newMessageBody: string) => {
 }
 
 export const sendMessageAC = () => {
+    debugger
     return {
         type: 'SEND-MESSAGE'
 

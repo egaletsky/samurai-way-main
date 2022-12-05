@@ -1,23 +1,17 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 
-import {DialogItem} from './DialogItem/DialogItem';
-import {Message} from './Message/Message';
-import {store, AppStateType} from '../../redux/redux-store'
 
-import {changeNewMessageAC, InitialStateType, sendMessageAC} from '../../redux/dialog-reducer';
+import {AppStateType} from '../../redux/redux-store'
+
+import {changeNewMessageAC, DialogInitialStateType, sendMessageAC} from '../../redux/dialog-reducer';
 import {Dialogs} from './Dialogs';
-import {dialogPageType} from '../../redux/store';
+
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
 
-type DialogsContainerType = {
-    store: typeof store
-}
-
-
 type MapStatePropsType = {
-    dialogPage: InitialStateType
+    dialogPage: DialogInitialStateType
 }
 type MapDispatchPropsType = {
 

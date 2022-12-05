@@ -1,5 +1,5 @@
 //import store from './redux/store';
-import store from './redux/redux-store';
+import {store} from './redux/redux-store';
 
 
 import React from 'react';
