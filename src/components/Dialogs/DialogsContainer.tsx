@@ -3,7 +3,7 @@ import React from 'react';
 
 import {AppStateType} from '../../redux/redux-store'
 
-import {changeNewMessageAC, DialogInitialStateType, sendMessageAC} from '../../redux/dialog-reducer';
+import {changeNewMessageAC, DialogStateType, sendMessageAC} from '../../redux/dialog-reducer';
 import {Dialogs} from './Dialogs';
 
 import {connect} from 'react-redux';
@@ -11,7 +11,7 @@ import {Dispatch} from 'redux';
 
 
 type MapStatePropsType = {
-    dialogPage: DialogInitialStateType
+    dialogPage: DialogStateType
 }
 type MapDispatchPropsType = {
 

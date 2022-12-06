@@ -10,6 +10,8 @@ import {ActionsTypes, stateType} from './redux/store';
 import {store} from './redux/redux-store';
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 
+import {UsersContainer} from './components/Users/UsersContainer';
+
 type AppType = {}
 
 
@@ -24,13 +26,14 @@ export const App = (props: AppType) => {
                 <div className="app-wrapper-content">
 
 
-                    <Route path="/dialogs" render={() =>
-                        <DialogsContainer/>}
-                    />
-                    <Route path="/profile" render={() =>
-                        <Profile store={store}
-                        />
-                    }/>
+                    <Route path="/dialogs"
+                           render={() => <DialogsContainer/>}/>
+
+                    <Route path="/profile"
+                           render={() => <Profile store={store}/>}/>
+
+                    <Route path="/users"
+                           render={() => <UsersContainer/>}/>
 
 
                 </div>

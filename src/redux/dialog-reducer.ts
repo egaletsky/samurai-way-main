@@ -32,10 +32,10 @@ const initialState = {
     newMessageBody: ''
 }
 
-export type DialogInitialStateType = typeof initialState
+export type DialogStateType = typeof initialState
 
 
-export const dialogReducer = (state: DialogInitialStateType = initialState, action: ActionsTypes): DialogInitialStateType => {
+export const dialogReducer = (state: DialogStateType = initialState, action: ActionsTypes): DialogStateType => {
 
     switch (action.type) {
         case 'UPDATE-NEW-MESSAGE-BODY':
