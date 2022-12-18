@@ -23,14 +23,7 @@ type UsersActionsTypes =
 
 
 let initialState = {
-    users: [
-        {
-            id: 1,
-            followed: false,
-            name: 'Dmitry',
-            status: 'I am a boss',
-        },
-    ] as UserDataType[]
+    users: [] as UserDataType[]
 }
 
 export type UsersStateType = typeof initialState
