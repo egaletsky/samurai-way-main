@@ -17,22 +17,54 @@ class Users extends React.Component<UsersPropsType, UsersCItemState> {
     }*/
 
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => {
-                debugger
+
+                this.props.setUsers(response.data.items)
+                this.props.setTotalUserCount(response.data.totalCount)
+            })
+    }
+
+
+    onPageChanged = (pageNumber: number) => {
+        this.props.setCurrentPage(pageNumber)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            .then(response => {
+
                 this.props.setUsers(response.data.items)
             })
     }
 
+
     render() {
+
+
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+        let pages = []
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
+
         return (
             <div>
                 <div>
-                    <span>1</span>
-                    <span>2</span>
-                    <span className={s.selectedPage}>3</span>
-                    <span>4</span>
-                    <span>5</span>
+                    {
+                        pages.map(p => {
+
+                            let style = ''
+                            if (this.props.currentPage === p) {
+                                style = s.selectedPage
+                            }
+
+                            return <span className={style}
+
+                                         onClick={() => this.onPageChanged(p)}
+                            >
+                                {p}
+                            </span>
+                        })
+                    }
+
                 </div>
                 {this.props.usersPage.users.map(u =>
                     <div key={u.id}>
