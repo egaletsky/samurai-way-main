@@ -26,7 +26,6 @@ type UsersActionsTypes =
     | ReturnType<typeof currentPageAC>
     | ReturnType<typeof setTotalUsersCountAC>
 
-
 let initialState = {
     users: [],
     pageSize: 100,
