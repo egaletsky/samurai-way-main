@@ -1,73 +1,41 @@
-import React from 'react';
-
-import {UsersPropsType} from './UsersContainer';
-import s from './Users.module.css'
-import axios from 'axios';
-import userPhoto from '../../assets/user.png'
-import {UserDataType, UsersStateType} from '../../redux/users-reducer';
-
-export interface UsersCItemState {
-}
+import React from 'react'
+import s from './Users.module.css';
+import userPhoto from '../../assets/user.png';
 
 
-class Users extends React.Component<UsersPropsType, UsersCItemState> {
+export const Users = (props) => {
 
-    /*constructor(props: UsersPropsType) {
-        super(props)
-    }*/
 
-    componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
-
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUserCount(response.data.totalCount)
-            })
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    let pages = []
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
     }
 
 
-    onPageChanged = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-            .then(response => {
-
-                this.props.setUsers(response.data.items)
-            })
-    }
-
-
-    render() {
-
-
-        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
-        let pages = []
-        for (let i = 1; i <= pagesCount; i++) {
-            pages.push(i)
-        }
-
-        return (
+    return (
+        <div>
             <div>
-                <div>
-                    {
-                        pages.map(p => {
+                {
+                    pages.map(p => {
 
-                            let style = ''
-                            if (this.props.currentPage === p) {
-                                style = s.selectedPage
-                            }
+                        let style = ''
+                        if (props.currentPage === p) {
+                            style = s.selectedPage
+                        }
 
-                            return <span className={style}
+                        return <span className={style}
 
-                                         onClick={() => this.onPageChanged(p)}
-                            >
+                                     onClick={() => onPageChanged(p)}
+                        >
                                 {p}
                             </span>
-                        })
-                    }
+                    })
+                }
 
-                </div>
-                {this.props.usersPage.users.map(u =>
-                    <div key={u.id}>
+            </div>
+            {this.props.usersPage.users.map(u =>
+                <div key={u.id}>
                     <span>
                         <div>
                             <img src={u.photos?.small != null ? u.photos.small : userPhoto} className={s.userPhoto}/>
@@ -82,7 +50,7 @@ class Users extends React.Component<UsersPropsType, UsersCItemState> {
                         </div>
                     </span>
 
-                        <span>
+                    <span>
                         <span>
                             <div>{u.name}</div>
                             <div>{u.status}</div>
@@ -94,12 +62,9 @@ class Users extends React.Component<UsersPropsType, UsersCItemState> {
 
                     </span>
 
-                    </div>
-                )}
-            </div>
-        );
-    }
-
+                </div>
+            )}
+        </div>
+    );
 }
 
-export default Users
