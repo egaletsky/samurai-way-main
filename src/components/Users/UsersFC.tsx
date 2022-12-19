@@ -5,7 +5,7 @@ import axios from 'axios';
 import userPhoto from '../../assets/user.png'
 
 export const UsersFC = (props: UsersPropsType) => {
-    if (props.usersPage.users.length === 1) {
+    if (props.users.length === 1) {
 
         // const instance = axios.create({
         //     withCredentials: true,
@@ -50,7 +50,7 @@ export const UsersFC = (props: UsersPropsType) => {
 
     return (
         <div>
-            {props.usersPage.users.map(u =>
+            {props.users.map(u =>
                 <div key={u.id}>
                     <span>
                         <div>

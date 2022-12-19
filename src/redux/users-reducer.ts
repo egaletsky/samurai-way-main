@@ -3,6 +3,7 @@ const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS = 'SET_TOTAL_USERS'
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 
 type UserPhotosType = {
@@ -20,17 +21,19 @@ export type UserDataType = {
 }
 
 type UsersActionsTypes =
-    | ReturnType<typeof unfollowAC>
-    | ReturnType<typeof followAC>
-    | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof currentPageAC>
-    | ReturnType<typeof setTotalUsersCountAC>
+    | ReturnType<typeof unfollow>
+    | ReturnType<typeof follow>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalUsersCount>
+    | ReturnType<typeof setIsFetching>
 
 let initialState = {
     users: [],
-    pageSize: 100,
+    pageSize: 10,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 }
 
 
@@ -39,6 +42,7 @@ export type  UsersStateType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 //export type UsersStateType = typeof initialState
@@ -65,6 +69,8 @@ export const usersReducer = (state: UsersStateType = initialState, action: Users
 
         case SET_TOTAL_USERS:
             return {...state, totalUsersCount: action.payload.totalUsersCount}
+        case TOGGLE_IS_FETCHING:
+            return {...state, isFetching: action.payload.isFetching}
 
         default:
             return state
@@ -72,7 +78,7 @@ export const usersReducer = (state: UsersStateType = initialState, action: Users
 }
 
 
-export const followAC = (userID: number) => {
+export const follow = (userID: number) => {
     return {
         type: FOLLOW,
         payload: {
@@ -81,7 +87,7 @@ export const followAC = (userID: number) => {
     } as const
 }
 
-export const unfollowAC = (userID: number) => {
+export const unfollow = (userID: number) => {
     return {
         type: UNFOLLOW,
         payload: {
@@ -91,7 +97,7 @@ export const unfollowAC = (userID: number) => {
 }
 
 
-export const setUsersAC = (users: UserDataType[]) => {
+export const setUsers = (users: UserDataType[]) => {
     return {
         type: SET_USERS,
         payload: {
@@ -100,7 +106,7 @@ export const setUsersAC = (users: UserDataType[]) => {
     } as const
 }
 
-export const currentPageAC = (currentPage: number) => {
+export const setCurrentPage = (currentPage: number) => {
     return {
         type: SET_CURRENT_PAGE,
         payload: {
@@ -109,11 +115,20 @@ export const currentPageAC = (currentPage: number) => {
     } as const
 }
 
-export const setTotalUsersCountAC = (totalUsersCount: number) => {
+export const setTotalUsersCount = (totalUsersCount: number) => {
     return {
         type: SET_TOTAL_USERS,
         payload: {
             totalUsersCount: totalUsersCount
+        }
+    } as const
+}
+
+export const setIsFetching = (isFetching: boolean) => {
+    return {
+        type: TOGGLE_IS_FETCHING,
+        payload: {
+            isFetching: isFetching
         }
     } as const
 }
