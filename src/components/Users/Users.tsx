@@ -1,9 +1,19 @@
 import React from 'react'
 import s from './Users.module.css';
 import userPhoto from '../../assets/user.png';
+import {UserDataType} from '../../redux/users-reducer';
 
+type UsersType = {
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+    users: UserDataType[]
+    follow: (userID: number) => void
+    unfollow: (userID: number) => void
+    onPageChanged: (pageNumber: number) => void
+}
 
-export const Users = (props) => {
+export const Users = (props: UsersType) => {
 
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -26,7 +36,7 @@ export const Users = (props) => {
 
                         return <span className={style}
 
-                                     onClick={() => onPageChanged(p)}
+                                     onClick={() => props.onPageChanged(p)}
                         >
                                 {p}
                             </span>
@@ -34,7 +44,7 @@ export const Users = (props) => {
                 }
 
             </div>
-            {this.props.usersPage.users.map(u =>
+            {props.users.map(u =>
                 <div key={u.id}>
                     <span>
                         <div>
@@ -43,8 +53,8 @@ export const Users = (props) => {
                         <div>
                             {
                                 u.followed
-                                    ? <button onClick={() => (this.props.unfollow(u.id))}>unfollow</button>
-                                    : <button onClick={() => (this.props.follow(u.id))}>follow</button>
+                                    ? <button onClick={() => (props.unfollow(u.id))}>unfollow</button>
+                                    : <button onClick={() => (props.follow(u.id))}>follow</button>
                             }
 
                         </div>

@@ -1,24 +1,21 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {UsersFC} from './UsersFC';
 import {
     currentPageAC,
     followAC,
     setTotalUsersCountAC,
     setUsersAC,
     unfollowAC,
-    UserDataType,
-    UsersStateType
+    UserDataType
 } from '../../redux/users-reducer';
 import {AppStateType} from '../../redux/redux-store';
 import {Dispatch} from 'redux';
-import UsersAPIComponent from './UsersAPIComponent';
 import axios from 'axios/index';
 import {Users} from './Users';
 
 
 type MapStatePropsType = {
-    usersPage: UsersStateType
+    users: UserDataType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number
@@ -69,7 +66,16 @@ class UsersContainer extends React.Component<UsersPropsType, UsersCItemState> {
     render() {
 
 
-        return <Users/>
+        return <Users totalUsersCount={this.props.totalUsersCount}
+                      pageSize={this.props.pageSize}
+                      currentPage={this.props.currentPage}
+                      onPageChanged={this.onPageChanged}
+                      follow={this.props.follow}
+                      unfollow={this.props.unfollow}
+                      users={this.props.users}
+
+
+        />
     }
 
 }
@@ -77,7 +83,7 @@ class UsersContainer extends React.Component<UsersPropsType, UsersCItemState> {
 
 let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        usersPage: state.usersPage,
+        users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage
