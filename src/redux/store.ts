@@ -32,8 +32,6 @@ export type dialogPageType = {
 }
 
 
-//window.store = store
-
 export type ActionsTypes =
     ReturnType<typeof addPostAC>
     | ReturnType<typeof changeNewTextAC>
