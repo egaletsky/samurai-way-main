@@ -1,4 +1,4 @@
-import {addPostAC, changeNewTextAC} from './profile-reducer';
+import {addPostAC, changeNewTextAC, setUserProfile} from './profile-reducer';
 import {changeNewMessageAC, sendMessageAC} from './dialog-reducer';
 
 
@@ -37,5 +37,6 @@ export type ActionsTypes =
     | ReturnType<typeof changeNewTextAC>
     | ReturnType<typeof sendMessageAC>
     | ReturnType<typeof changeNewMessageAC>
+    | ReturnType<typeof setUserProfile>
 
 

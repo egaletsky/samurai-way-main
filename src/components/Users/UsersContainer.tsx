@@ -1,20 +1,18 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {
-
-    follow, setCurrentPage, setIsFetching,
+    follow,
+    setCurrentPage,
+    setIsFetching,
     setTotalUsersCount,
     setUsers,
     unfollow,
     UserDataType
 } from '../../redux/users-reducer';
 import {AppStateType} from '../../redux/redux-store';
-import {Dispatch} from 'redux';
 
 import {Users} from './Users';
 import axios from 'axios';
-
-import preloader from './../../assets/Spinner.svg';
 import {Preloader} from '../common/Preloader/Preloader';
 
 

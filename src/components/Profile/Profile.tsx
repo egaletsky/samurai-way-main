@@ -6,8 +6,8 @@ import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 import {MyPostsContainer} from './MyPosts/MyPostsContainer';
 import {store} from '../../redux/redux-store';
 
-type ProfileType = {
-    store: typeof store
+export type ProfileType = {
+    // store: typeof store
 }
 
 
@@ -18,7 +18,7 @@ export const Profile = (props: ProfileType) => {
         <div className={s.content}>
 
             <ProfileInfo/>
-            <MyPostsContainer store={props.store}/>
+            {/*<MyPostsContainer store={props.store}/>*/}
 
         </div>
     );

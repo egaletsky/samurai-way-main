@@ -8,6 +8,7 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {store} from './redux/redux-store';
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 
+import ProfileContainer from './components/Profile/ProfileContainer'
 import UsersContainer from './components/Users/UsersContainer';
 
 type AppType = {}
@@ -28,7 +29,7 @@ export const App = (props: AppType) => {
                            render={() => <DialogsContainer/>}/>
 
                     <Route path="/profile"
-                           render={() => <Profile store={store}/>}/>
+                           render={() => <ProfileContainer/>}/> // store={store}
 
                     <Route path="/users"
                            render={() => <UsersContainer/>}/>
