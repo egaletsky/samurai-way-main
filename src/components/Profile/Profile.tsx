@@ -8,6 +8,8 @@ import {store} from '../../redux/redux-store';
 
 export type ProfileType = {
     // store: typeof store
+
+    profile: any
 }
 
 
@@ -17,8 +19,8 @@ export const Profile = (props: ProfileType) => {
     return (
         <div className={s.content}>
 
-            <ProfileInfo/>
-            {/*<MyPostsContainer store={props.store}/>*/}
+            <ProfileInfo profile={props.profile}/>
+            <MyPostsContainer/>
 
         </div>
     );

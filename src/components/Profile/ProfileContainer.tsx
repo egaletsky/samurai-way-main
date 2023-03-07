@@ -6,42 +6,39 @@ import {setUserProfile} from '../../redux/profile-reducer';
 import {AppStateType} from '../../redux/redux-store';
 
 type MapStatePropsType = {
-    //  profile: string
+    profile: any
 }
 
 type MapDispatchPropsType = {
-    // setUserProfile: (profile: string) => void
-}
-
-export type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
-
-
-export interface ProfileCItemState {
+    setUserProfile: (profile: any) => void
 }
 
 
-class ProfileContainer extends React.Component<ProfilePropsType, ProfileCItemState> {
+type PropsType = MapStatePropsType & MapDispatchPropsType
 
-    // componentDidMount() {
-    //     axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
-    //         .then(response => {
-    //             // this.props.setUserProfile(response.data)
-    //         })
-    // }
-    //
+class ProfileContainer extends React.Component<PropsType, any> {
+
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+            .then(response => {
+                this.props.setUserProfile(response.data)
+            })
+    }
+
     render() {
-        return <>
+        return (
+            // <Profile {...this.props}/>
+            <Profile profile={this.props.profile}/>
 
-        </>
-        //
+        )
     }
 
 
 }
 
 let mapStateToProps = (state: AppStateType): MapStatePropsType => ({
-    //  profile: state.profilePage.profile
+    profile: state.profilePage.profile
 })
 export default connect(mapStateToProps,
-    {})(ProfileContainer)
+    {setUserProfile})(ProfileContainer)
 //setUserProfile
