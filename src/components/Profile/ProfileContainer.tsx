@@ -4,6 +4,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {setUserProfile} from '../../redux/profile-reducer';
 import {AppStateType} from '../../redux/redux-store';
+import {withRouter} from 'react-router-dom';
 
 type MapStatePropsType = {
     profile: any
@@ -39,6 +40,9 @@ class ProfileContainer extends React.Component<PropsType, any> {
 let mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     profile: state.profilePage.profile
 })
+
+let WithUrlDataContainerComponent = withRouter(ProfileContainer);
+
 export default connect(mapStateToProps,
-    {setUserProfile})(ProfileContainer)
+    {setUserProfile})(ProfileContainer)(WithUrlDataContainerComponent)
 //setUserProfile
