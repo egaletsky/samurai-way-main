@@ -1,28 +1,28 @@
 import {v1} from 'uuid';
-import {ActionsTypes, PostDataType, profilePageType} from './store';
+import {ActionsTypes, PostDataType, PostsType, profilePageType} from './store';
 
 
-let initialState = {
+let initialState: profilePageType = {
     posts: [
-        {id: v1(), message: 'post 1 hi', likesCount: 23},
-        {id: v1(), message: 'post2 how is your', likesCount: 13},
-        {id: v1(), message: 'post 3 yo', likesCount: 6},
-    ] as PostDataType[],
+        {id: v1(), date: '111111', message: 'post 1 hi', likeCount: 23},
+        {id: v1(), date: '111111', message: 'post2 how is your', likeCount: 13},
+        {id: v1(), date: '111111', message: 'post 3 yo', likeCount: 6},
+    ],
     newPostText: 'it-kamasutra',
-    profile: ''
+    profile: null
 }
 
-export type ProfileInitialStateType = typeof initialState
 
-export const profileReducer = (state: ProfileInitialStateType = initialState, action: ActionsTypes): ProfileInitialStateType => {
+export const profileReducer = (state: profilePageType = initialState, action: ActionsTypes): profilePageType => {
 
 
     switch (action.type) {
         case 'ADD-POST':
-            let newPost: PostDataType = {
+            let newPost: PostsType = {
                 id: (state.posts.length + 1).toString(), // или просто номер вставлять вручную
                 message: state.newPostText, //state.profilePage.newPostText,
-                likesCount: 0
+                likeCount: 0,
+                date: 'ffdsfs'
             };
             return {
                 ...state,
@@ -58,7 +58,7 @@ export const changeNewTextAC = (newText1: string) => {
     } as const
 }
 
-export const setUserProfile = (profile: string) => {
+export const setUserProfile = (profile: any) => {
     return {
         type: 'SET-USER-PROFILE',
         profile: profile

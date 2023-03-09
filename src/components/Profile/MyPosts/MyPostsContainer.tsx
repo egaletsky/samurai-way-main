@@ -6,11 +6,11 @@ import {AppStateType} from '../../../redux/redux-store';
 import {connect} from 'react-redux';
 
 import {Dispatch} from 'redux';
-import {PostDataType} from '../../../redux/store';
+import {PostDataType, PostsType} from '../../../redux/store';
 
 
 type MapStatePropsType = {
-    posts: PostDataType[]
+    posts: PostsType[]
     newPostText: string
 }
 type MapDispatchPropsType = {

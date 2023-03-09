@@ -7,8 +7,10 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {store} from './redux/redux-store';
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 
-import ProfileContainer from './components/Profile/ProfileContainer'
+
 import UsersContainer from './components/Users/UsersContainer';
+import ProfileContainer from './components/Profile/ProfileContainer';
+
 
 type AppType = {}
 
@@ -27,8 +29,7 @@ export const App = (props: AppType) => {
                     <Route path="/dialogs"
                            render={() => <DialogsContainer/>}/>
 
-                    <Route path="/profile"
-                           render={() => <ProfileContainer/>}/>
+                    <Route path={'/profile/:userId?'} render={() => <ProfileContainer/>}/>
 
                     <Route path="/users"
                            render={() => <UsersContainer/>}/>

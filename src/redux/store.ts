@@ -20,11 +20,39 @@ export type stateType = {
     dialogPage: dialogPageType
     sidebar: {}
 }
-export type profilePageType = {
-    posts: PostDataType[]
-    newPostText: string
 
+
+export type profilePageType = {
+    posts: PostsType[],
+    newPostText: string,
+    profile: userProfileType
 }
+
+export type PostsType = {
+    id: string, date: string, message: string, likeCount: number
+}
+export type userProfileType = null | {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: {
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
+    }
+    photos: {
+        small: string
+        large: string
+    }
+}
+
+
 export type dialogPageType = {
     messages: MessageDateType[]
     dialogs: DialogsDataType[]
