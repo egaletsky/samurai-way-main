@@ -1,5 +1,5 @@
 import {v1} from 'uuid';
-import {ActionsTypes, PostDataType, PostsType, profilePageType} from './store';
+import {ActionsTypes, PostDataType, PostsType, profilePageType, userProfileType} from './store';
 
 
 let initialState: profilePageType = {

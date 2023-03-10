@@ -1,5 +1,6 @@
 import {addPostAC, changeNewTextAC, setUserProfile} from './profile-reducer';
 import {changeNewMessageAC, sendMessageAC} from './dialog-reducer';
+import {setAuthUserData} from './auth-reducer';
 
 
 export type PostDataType = {

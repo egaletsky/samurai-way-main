@@ -17,7 +17,8 @@ export const ProfileInfo = (props: ProfileInfoType) => {
     return (
         <div>
             <div>
-                <img src="https://tinypng.com/images/social/website.jpg"/>
+                <img
+                    src="https://whatifgaming.com/wp-content/uploads/2022/03/Rick-and-Morty-jumping-out-of-portal.gif"/>
             </div>
 
             <div className={s.descriptionBlock}>
