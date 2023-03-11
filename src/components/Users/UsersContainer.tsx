@@ -14,6 +14,7 @@ import {AppStateType} from '../../redux/redux-store';
 import {Users} from './Users';
 import axios from 'axios';
 import {Preloader} from '../common/Preloader/Preloader';
+import {getUsers} from '../../api/api';
 
 
 type MapStatePropsType = {
@@ -42,17 +43,13 @@ export interface UsersCItemState {
 
 class UsersContainer extends React.Component<UsersPropsType, UsersCItemState> {
 
-    /*constructor(props: UsersPropsType) {
-        super(props)
-    }*/
-
     componentDidMount() {
         this.props.setIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {withCredentials: true})
-            .then(response => {
+        getUsers(this.props.currentPage, this.props.pageSize)
+            .then(data => {
                 this.props.setIsFetching(false)
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(data.totalCount)
             })
     }
 
@@ -60,16 +57,16 @@ class UsersContainer extends React.Component<UsersPropsType, UsersCItemState> {
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.setIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {withCredentials: true})
-            .then(response => {
+
+        getUsers(pageNumber, this.props.pageSize)
+            .then(data => {
                 this.props.setIsFetching(false)
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(data.items)
             })
     }
 
 
     render() {
-
 
         return <>
             {this.props.isFetching ? <Preloader/> : null}
@@ -80,8 +77,6 @@ class UsersContainer extends React.Component<UsersPropsType, UsersCItemState> {
                    follow={this.props.follow}
                    unfollow={this.props.unfollow}
                    users={this.props.users}
-
-
             />
         </>
 
