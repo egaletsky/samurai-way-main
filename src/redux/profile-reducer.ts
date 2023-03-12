@@ -1,5 +1,8 @@
 import {v1} from 'uuid';
 import {ActionsTypes, PostDataType, PostsType, profilePageType, userProfileType} from './store';
+import {Dispatch} from 'redux';
+import {authAPI, profileAPI} from '../api/api';
+import {setAuthUserData} from './auth-reducer';
 
 
 let initialState: profilePageType = {
@@ -65,3 +68,13 @@ export const setUserProfile = (profile: any) => {
     } as const
 }
 
+export const getProfileTC = (userId: string) => {
+
+    return (dispatch: Dispatch) => {
+
+        profileAPI.getProfile(userId)
+            .then(data => {
+                dispatch(setUserProfile(data))
+            })
+    }
+}

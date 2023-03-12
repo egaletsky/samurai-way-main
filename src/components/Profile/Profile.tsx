@@ -9,7 +9,6 @@ import {userProfileType} from '../../redux/store';
 
 
 type PropsType = {
-    setUserProfile: (profile: userProfileType) => void
     profile: userProfileType
     children?: ReactNode
 }

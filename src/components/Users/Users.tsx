@@ -1,9 +1,9 @@
 import React from 'react'
 import s from './Users.module.css';
 import userPhoto from '../../assets/user.png';
-import {UserDataType} from '../../redux/users-reducer';
+import {follow, unfollow, UserDataType} from '../../redux/users-reducer';
 import {NavLink} from 'react-router-dom';
-import {seFollow, setUnfollow} from '../../api/api';
+import {usersAPI} from '../../api/api';
 
 type UsersType = {
     totalUsersCount: number
@@ -63,28 +63,13 @@ export const Users = (props: UsersType) => {
                                 u.followed
                                     ? <button disabled={props.followingInProgress.some(id => id === u.id)}
                                               onClick={() => {
-                                                  props.toggleFollowingProgress(true, u.id)
-                                                  setUnfollow(u.id)
-                                                      .then(data => {
-                                                          if (data.resultCode == 0) {
-                                                              props.unfollow(u.id)
-                                                          }
-                                                          props.toggleFollowingProgress(false, u.id)
-                                                      })
-
+                                                  props.unfollow(u.id)
                                               }}>unfollow</button>
 
 
                                     : <button disabled={props.followingInProgress.some(id => id === u.id)}
                                               onClick={() => {
-                                                  props.toggleFollowingProgress(true, u.id)
-                                                  seFollow(u.id)
-                                                      .then(data => {
-                                                          if (data.resultCode == 0) {
-                                                              props.follow(u.id)
-                                                          }
-                                                          props.toggleFollowingProgress(false, u.id)
-                                                      })
+                                                  props.follow(u.id)
                                               }}>follow</button>
                             }
 

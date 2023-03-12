@@ -1,4 +1,7 @@
 import {ActionsTypes} from './store';
+import {Dispatch} from 'redux';
+import {authAPI, usersAPI} from '../api/api';
+import {setIsFetching, setTotalUsersCount, setUsers} from './users-reducer';
 
 const SET_USER_DATA = 'SET_USER_DATA'
 
@@ -47,3 +50,16 @@ export const setAuthUserData = (id: number, email: string, login: string) => ({
 })
 
 
+export const getAuthTC = () => {
+
+    return (dispatch: Dispatch) => {
+
+        authAPI.getAuth()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    const {id, login, email} = data.data
+                    dispatch(setAuthUserData(id, email, login))
+                }
+            })
+    }
+}
