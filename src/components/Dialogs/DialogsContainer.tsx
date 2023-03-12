@@ -13,7 +13,7 @@ import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 type MapStatePropsType = {
     dialogPage: DialogStateType
-    isAuth: boolean
+
 }
 type MapDispatchPropsType = {
 
@@ -27,8 +27,8 @@ export type DialogsPropsType = MapStatePropsType & MapDispatchPropsType
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        dialogPage: state.dialogPage,
-        isAuth: state.auth.isAuth
+        dialogPage: state.dialogPage
+
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
