@@ -12,7 +12,8 @@ let initialState: profilePageType = {
         {id: v1(), date: '111111', message: 'post 3 yo', likeCount: 6},
     ],
     newPostText: 'it-kamasutra',
-    profile: null
+    profile: null,
+    status: ''
 }
 
 
@@ -42,12 +43,18 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
                 ...state,
                 profile: action.profile
             };
+        case 'SET-STATUS':
+            return {
+                ...state,
+                status: action.status
+            };
+
         default:
             return state
     }
 }
 
-
+//AC
 export const addPostAC = () => {
     return {
         type: 'ADD-POST'
@@ -68,13 +75,48 @@ export const setUserProfile = (profile: any) => {
     } as const
 }
 
+export const setStatus = (status: string) => {
+    return {
+        type: 'SET-STATUS',
+        status: status
+    } as const
+}
+
+
+//TC
+
 export const getProfileTC = (userId: string) => {
 
     return (dispatch: Dispatch) => {
 
         profileAPI.getProfile(userId)
-            .then(data => {
-                dispatch(setUserProfile(data))
+            .then(response => {
+                dispatch(setUserProfile(response.data))
+            })
+    }
+}
+
+export const getStatusTC = (userId: string) => {
+
+    return (dispatch: Dispatch) => {
+
+        profileAPI.getStatus(userId)
+            .then(response => {
+                dispatch(setStatus(response.data))
+            })
+    }
+}
+
+
+export const updateStatusTC = (status: string) => {
+
+    return (dispatch: Dispatch) => {
+
+        profileAPI.updateStatus(status)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(setStatus(status))
+                }
             })
     }
 }
