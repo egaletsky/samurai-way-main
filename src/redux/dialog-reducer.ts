@@ -29,7 +29,7 @@ const initialState = {
         {id: 7, name: 'Taras'},
     ] as DialogType[],
 
-    newMessageBody: ''
+
 }
 
 export type DialogStateType = typeof initialState
@@ -38,19 +38,11 @@ export type DialogStateType = typeof initialState
 export const dialogReducer = (state: DialogStateType = initialState, action: ActionsTypes): DialogStateType => {
 
     switch (action.type) {
-        case 'UPDATE-NEW-MESSAGE-BODY':
-
-            return {
-                ...state,
-                newMessageBody: action.newMessageBody
-            };
-
 
         case 'SEND-MESSAGE':
-            let body = state.newMessageBody;
+            let body = action.newMessageBody;
             return {
                 ...state,
-                newMessageBody: '',
                 messages: [...state.messages, {id: state.messages.length + 1, message: body}]
             };
         default:
@@ -58,18 +50,9 @@ export const dialogReducer = (state: DialogStateType = initialState, action: Act
     }
 
 }
-
-export const changeNewMessageAC = (newMessageBody: string) => {
+export const sendMessageAC = (newMessageBody: string) => {
     return {
-        type: 'UPDATE-NEW-MESSAGE-BODY',
-        newMessageBody: newMessageBody
-    } as const
-}
-
-export const sendMessageAC = () => {
-    debugger
-    return {
-        type: 'SEND-MESSAGE'
-
+        type: 'SEND-MESSAGE',
+        newMessageBody
     } as const
 }

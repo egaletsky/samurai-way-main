@@ -1,5 +1,5 @@
-import {addPostAC, changeNewTextAC, setStatus, setUserProfile} from './profile-reducer';
-import {changeNewMessageAC, sendMessageAC} from './dialog-reducer';
+import {addPostAC, setStatus, setUserProfile} from './profile-reducer';
+import {sendMessageAC} from './dialog-reducer';
 import {setAuthUserData} from './auth-reducer';
 
 
@@ -25,7 +25,6 @@ export type stateType = {
 
 export type profilePageType = {
     posts: PostsType[],
-    newPostText: string,
     profile: userProfileType,
     status: string
 }
@@ -64,9 +63,7 @@ export type dialogPageType = {
 
 export type ActionsTypes =
     ReturnType<typeof addPostAC>
-    | ReturnType<typeof changeNewTextAC>
     | ReturnType<typeof sendMessageAC>
-    | ReturnType<typeof changeNewMessageAC>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
 
