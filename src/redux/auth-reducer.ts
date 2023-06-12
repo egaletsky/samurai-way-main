@@ -1,7 +1,7 @@
-import {ActionsTypes} from './store';
 import {Dispatch} from 'redux';
-import {authAPI, usersAPI} from '../api/api';
-import {setIsFetching, setTotalUsersCount, setUsers} from './users-reducer';
+import {authAPI, formRegDataType} from '../api/api';
+import {AppThunkType} from './redux-store';
+
 
 const SET_USER_DATA = 'SET_USER_DATA'
 
@@ -22,34 +22,27 @@ let initialState: AuthStateType = {
     isAuth: false
 }
 
-
+//TYPES AC
 export type AuthActionsTypes = ReturnType<typeof setAuthUserData>
 
 
 export const authReducer = (state = initialState, action: AuthActionsTypes): AuthStateType => {
 
-
     switch (action.type) {
         case SET_USER_DATA:
-            return {
-                ...state,
-                ...action.data,
-                isAuth: true
-            }
-
-
+            return {...state, ...action.payload}
         default:
             return state
     }
 }
 
-
-export const setAuthUserData = (id: number, email: string, login: string) => ({
+//AC
+export const setAuthUserData = (id: number | null, login: string | null, email: string | null, isAuth: boolean) => ({
     type: SET_USER_DATA,
-    data: {id, email, login}
+    payload: {id, login, email, isAuth}
 })
 
-
+//TC
 export const getAuthTC = () => {
 
     return (dispatch: Dispatch) => {
@@ -58,8 +51,22 @@ export const getAuthTC = () => {
             .then(data => {
                 if (data.resultCode === 0) {
                     const {id, login, email} = data.data
-                    dispatch(setAuthUserData(id, email, login))
+                    dispatch(setAuthUserData(id, login, email, true))
                 }
             })
     }
+}
+export const login = (formData: formRegDataType): AppThunkType => (dispatch) => {
+    authAPI.login(formData).then((data) => {
+        if (data.resultCode === 0) {
+            dispatch(getAuthTC())
+        }
+    })
+}
+export const logout = (): AppThunkType => (dispatch) => {
+    authAPI.logout().then((data) => {
+        if (data.resultCode === 0) {
+            dispatch(setAuthUserData(null, null, null, false))
+        }
+    })
 }

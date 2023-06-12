@@ -2,7 +2,7 @@ import React, {ReactNode} from 'react';
 import s from './Header.module.css'
 import {Navbar} from '../Navbar/Navbar';
 import {NavLink} from 'react-router-dom';
-import {userProfileType} from '../../redux/store';
+
 
 type PropsType = {
     children?: ReactNode

@@ -1,9 +1,13 @@
 import {v1} from 'uuid';
-import {ActionsTypes, PostDataType, PostsType, profilePageType, userProfileType} from './store';
 import {Dispatch} from 'redux';
-import {authAPI, profileAPI} from '../api/api';
-import {setAuthUserData} from './auth-reducer';
+import {profileAPI} from '../api/api';
+import {PostsType, userProfileType} from './redux-store';
 
+export type profilePageType = {
+    posts: PostsType[],
+    profile: userProfileType,
+    status: string
+}
 
 let initialState: profilePageType = {
     posts: [
@@ -15,8 +19,14 @@ let initialState: profilePageType = {
     status: ''
 }
 
+//TYPES AC
+export type ProfileActionsTypes =
+    ReturnType<typeof addPostAC>
+    | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setStatus>
 
-export const profileReducer = (state: profilePageType = initialState, action: ActionsTypes): profilePageType => {
+
+export const profileReducer = (state: profilePageType = initialState, action: ProfileActionsTypes): profilePageType => {
 
 
     switch (action.type) {
@@ -55,15 +65,12 @@ export const addPostAC = (newPost: string) => {
         newPost
     } as const
 }
-
-
 export const setUserProfile = (profile: any) => {
     return {
         type: 'SET-USER-PROFILE',
         profile: profile
     } as const
 }
-
 export const setStatus = (status: string) => {
     return {
         type: 'SET-STATUS',
@@ -71,9 +78,7 @@ export const setStatus = (status: string) => {
     } as const
 }
 
-
 //TC
-
 export const getProfileTC = (userId: string) => {
 
     return (dispatch: Dispatch) => {
@@ -84,7 +89,6 @@ export const getProfileTC = (userId: string) => {
             })
     }
 }
-
 export const getStatusTC = (userId: string) => {
 
     return (dispatch: Dispatch) => {
@@ -95,8 +99,6 @@ export const getStatusTC = (userId: string) => {
             })
     }
 }
-
-
 export const updateStatusTC = (status: string) => {
 
     return (dispatch: Dispatch) => {

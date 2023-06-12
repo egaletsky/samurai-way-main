@@ -1,6 +1,12 @@
 import axios from 'axios';
 
 
+export type formRegDataType = {
+    email: string
+    password: string
+    rememberMe: boolean
+}
+
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     withCredentials: true,
@@ -29,6 +35,15 @@ export const usersAPI = {
 export const authAPI = {
     getAuth: () => {
         return instance.get(`auth/me`)
+            .then(res => res.data)
+    },
+
+    login(regData: formRegDataType) {
+        return instance.post('auth/login', regData)
+            .then(res => res.data)
+    },
+    logout() {
+        return instance.delete('auth/login')
             .then(res => res.data)
     }
 }

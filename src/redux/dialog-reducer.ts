@@ -1,6 +1,3 @@
-import {ActionsTypes} from './store';
-
-
 export type DialogType = {
     id: number
     name: string
@@ -34,8 +31,10 @@ const initialState = {
 
 export type DialogStateType = typeof initialState
 
+//TYPES AC
+export type DialogActionsTypes = ReturnType<typeof sendMessageAC>
 
-export const dialogReducer = (state: DialogStateType = initialState, action: ActionsTypes): DialogStateType => {
+export const dialogReducer = (state: DialogStateType = initialState, action: DialogActionsTypes): DialogStateType => {
 
     switch (action.type) {
 
@@ -50,6 +49,8 @@ export const dialogReducer = (state: DialogStateType = initialState, action: Act
     }
 
 }
+
+//AC
 export const sendMessageAC = (newMessageBody: string) => {
     return {
         type: 'SEND-MESSAGE',

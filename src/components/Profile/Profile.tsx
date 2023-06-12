@@ -4,8 +4,8 @@ import s from './Profile.module.css';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 
 import {MyPostsContainer} from './MyPosts/MyPostsContainer';
-import {store} from '../../redux/redux-store';
-import {userProfileType} from '../../redux/store';
+
+import {userProfileType} from '../../redux/redux-store';
 
 
 type PropsType = {

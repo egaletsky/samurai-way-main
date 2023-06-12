@@ -24,16 +24,6 @@ export type UserDataType = {
 
 }
 
-type UsersActionsTypes =
-    | ReturnType<typeof unfollowSuccess>
-    | ReturnType<typeof followSuccess>
-    | ReturnType<typeof setUsers>
-    | ReturnType<typeof setCurrentPage>
-    | ReturnType<typeof setTotalUsersCount>
-    | ReturnType<typeof setIsFetching>
-    | ReturnType<typeof toggleFollowingProgress>
-
-
 let initialState = {
     users: [],
     pageSize: 10,
@@ -53,7 +43,16 @@ export type  UsersStateType = {
     followingInProgress: number[]
 }
 
-//export type UsersStateType = typeof initialState
+//TYPES AC
+export type UsersActionsTypes =
+    | ReturnType<typeof unfollowSuccess>
+    | ReturnType<typeof followSuccess>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalUsersCount>
+    | ReturnType<typeof setIsFetching>
+    | ReturnType<typeof toggleFollowingProgress>
+
 
 export const usersReducer = (state: UsersStateType = initialState, action: UsersActionsTypes): UsersStateType => {
 
@@ -91,7 +90,7 @@ export const usersReducer = (state: UsersStateType = initialState, action: Users
     }
 }
 
-
+//AC
 export const followSuccess = (userID: number) => {
     return {
         type: FOLLOW,
@@ -157,6 +156,7 @@ export const toggleFollowingProgress = (isFetching: boolean, userID: number) => 
     } as const
 }
 
+//TC
 export const getUsersTC = (currentPage: number, pageSize: number) => {
 
     return (dispatch: Dispatch) => {
