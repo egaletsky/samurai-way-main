@@ -1,53 +1,42 @@
-import React from 'react'
-import {Field, InjectedFormProps, reduxForm} from 'redux-form';
-import {Input} from '../common/FormsControls/Textarea';
-import {required} from '../../utils/validators';
+import React, {ComponentType} from 'react'
+import {formRegDataType} from '../../api/api'
+import {Redirect} from 'react-router-dom'
+import {compose} from 'redux'
+import {AppStateType} from '../../redux/redux-store';
+import {connect} from 'react-redux'
+import {LoginForm} from './LoginForm';
+import {login} from '../../redux/auth-reducer';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
-type LoginPropsType = {}
-
-type FormDataType = {
-    login: string
-    password: string
-    rememberMe: boolean
-}
-
-
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
-
-    return <form onSubmit={props.handleSubmit}>
-        <div>
-            <Field placeholder={'Login'} component={Input} name={'login'}
-                   validate={[required]}/>
-        </div>
-        <div>
-            <Field placeholder={'Password'} component={Input} name={'password'}
-                   validate={[required]}/>
-        </div>
-        <div>
-
-            <Field type={'checkbox'} component={Input} name={'rememberMe'}/>remember me
-        </div>
-        <div>
-            <button>Login</button>
-        </div>
-
-
-    </form>
-
-
-}
-
-const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
-
-export const Login = () => {
-    const onSubmit = (formData: FormDataType) => {
-        console.log(formData)
+const Login = (props: LoginPropsType) => {
+    const onSubmit = (formData: formRegDataType) => {
+        props.login(formData)
     }
-
-    return <div>
-        <h1>LOGIN</h1>
-        <LoginReduxForm onSubmit={onSubmit}/>
-    </div>
+    return props.isAuth ? <Redirect to={'/profile'}/> : <>
+        <h1>Login</h1>
+        <LoginForm onSubmit={onSubmit}/>
+    </>
 }
 
-export default Login
+type mapStateToPropsType = {
+    userId: number | null
+    isAuth: boolean
+}
+type mapDispatchToPropsType = {
+    login: (formData: formRegDataType) => void
+}
+type LoginPropsType = mapStateToPropsType & mapDispatchToPropsType
+
+const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
+    return {
+        userId: state.auth.id,
+        isAuth: state.auth.isAuth
+    }
+}
+
+
+export default compose(
+    //withAuthRedirect,
+    connect(mapStateToProps, {login}),
+)(Login)
+//export default connect(mapStateToProps, {login})(Login)
