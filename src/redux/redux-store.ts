@@ -6,6 +6,7 @@ import {UsersActionsTypes, usersReducer} from './users-reducer';
 import {AuthActionsTypes, authReducer} from './auth-reducer';
 import thunkMiddleware, {ThunkAction} from 'redux-thunk'
 import {reducer as formReducer} from 'redux-form'
+import {FormAction} from 'redux-form/lib/actions'
 
 
 let rootReducer = combineReducers({
@@ -27,7 +28,7 @@ type ActionsType =
 export type AppStateType = ReturnType<typeof rootReducer>
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
-export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, ActionsType>
+export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, ActionsType | FormAction>
 
 
 export type PostsType = {

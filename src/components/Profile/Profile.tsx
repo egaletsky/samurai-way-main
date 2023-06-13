@@ -13,6 +13,7 @@ type PropsType = {
     children?: ReactNode
     status: string
     updateStatus: (newStatus: string) => void
+    isAuth: boolean
 }
 
 

@@ -11,11 +11,9 @@
 }
 
 
-
-
 .app-wrapper-content {
     grid-area: c;
-    background-color: palevioletred;
+    background-color: #daf8c1;
 
 }
 
