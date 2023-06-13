@@ -8,19 +8,18 @@ type PropsType = {
     children?: ReactNode
     isAuth: boolean
     login: string | null
+    logout: () => void
 }
 
 
-export const Header = (props: PropsType) => {
-    return (<header className={s.header}>
-            <img
-                src="https://cdn-icons-png.flaticon.com/128/9985/9985425.png"/>
-            <div className={s.loginBlock}>
-                {props.isAuth ? props.login :
-                    <NavLink to={'/login'}>login</NavLink>}
-
-            </div>
-        </header>
-    );
-};
-
+export function Header(props: PropsType) {
+    return <header className={s.header}>
+        <img src="https://cdn-icons-png.flaticon.com/128/9985/9985425.png"/>
+        <div className={s.loginBlock}>
+            {props.isAuth ? <>{props.login}
+                    <button onClick={props.logout}>logout</button>
+                </> :
+                <NavLink to={'/login'}>login</NavLink>}
+        </div>
+    </header>
+}
