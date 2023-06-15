@@ -79,7 +79,7 @@ export const setStatus = (status: string) => {
 }
 
 //TC
-export const getProfileTC = (userId: string) => {
+export const getProfileTC = (userId: number) => {
 
     return (dispatch: Dispatch) => {
 
@@ -89,7 +89,7 @@ export const getProfileTC = (userId: string) => {
             })
     }
 }
-export const getStatusTC = (userId: string) => {
+export const getStatusTC = (userId: number) => {
 
     return (dispatch: Dispatch) => {
 

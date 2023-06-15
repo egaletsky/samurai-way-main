@@ -1,17 +1,13 @@
 import React from 'react';
 import {Header} from './Header';
 import {connect} from 'react-redux';
-import {getAuthTC, logout} from '../../redux/auth-reducer';
+import {logout} from '../../redux/auth-reducer';
 
 import {AppStateType} from '../../redux/redux-store';
 
 
 class HeaderContainer extends React.Component<PropsType> {
 
-    componentDidMount() {
-
-        this.props.getAuthTC()
-    }
 
     render() {
         return (
@@ -27,7 +23,6 @@ type mapStateToPropsType = {
     id: number | null
 }
 type mapDispatchToPropsType = {
-    getAuthTC: () => void,
     logout: () => void
 }
 type PropsType = mapStateToPropsType & mapDispatchToPropsType
@@ -39,4 +34,4 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
 })
 
 
-export default connect(mapStateToProps, {getAuthTC, logout})(HeaderContainer)
+export default connect(mapStateToProps, {logout})(HeaderContainer)

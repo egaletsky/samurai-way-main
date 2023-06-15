@@ -43,7 +43,8 @@ export const setAuthUserData = (id: number | null, login: string | null, email: 
 })
 
 //TC
-export const getAuthTC = () => {
+
+/*export const getAuthUserData = () => {
 
     return (dispatch: Dispatch) => {
 
@@ -55,11 +56,20 @@ export const getAuthTC = () => {
                 }
             })
     }
+}*/
+
+export const getAuthUserData = (): AppThunkType<Promise<any>> => (dispatch) => {
+    return authAPI.getAuth().then((data) => {
+        if (data.resultCode === 0) {
+            const {id, login, email} = data.data
+            dispatch(setAuthUserData(id, login, email, true))
+        }
+    })
 }
 export const login = (formData: formRegDataType): AppThunkType => (dispatch) => {
     authAPI.login(formData).then((data) => {
         if (data.resultCode === 0) {
-            dispatch(getAuthTC())
+            dispatch(getAuthUserData())
         } else {
             let message = data.messages.length > 0 ? data.messages[0] : 'some error'
             dispatch(stopSubmit('login', {_error: message}))
