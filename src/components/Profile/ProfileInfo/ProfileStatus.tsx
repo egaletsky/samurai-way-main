@@ -20,7 +20,7 @@ export const ProfileStatus = (props: ProfileStatusPropsType) => {
 
     const deactivateEditMode = () => {
         setEditMode(false)
-        //  debugger
+
         props.updateStatus && props.updateStatus(status)
     }
 

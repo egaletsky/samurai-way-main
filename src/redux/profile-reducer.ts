@@ -11,9 +11,9 @@ export type profilePageType = {
 
 let initialState: profilePageType = {
     posts: [
-        {id: v1(), date: '111111', message: 'post 1 hi', likeCount: 23},
-        {id: v1(), date: '111111', message: 'post2 how is your', likeCount: 13},
-        {id: v1(), date: '111111', message: 'post 3 yo', likeCount: 6},
+        {id: '1', date: '111111', message: 'post 1 hi', likeCount: 23},
+        {id: '2', date: '111111', message: 'post2 how is your', likeCount: 13},
+        {id: '3', date: '111111', message: 'post 3 yo', likeCount: 6},
     ],
     profile: null,
     status: ''
@@ -24,7 +24,7 @@ export type ProfileActionsTypes =
     ReturnType<typeof addPostAC>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
-
+    | ReturnType<typeof deletePostAC>
 
 export const profileReducer = (state: profilePageType = initialState, action: ProfileActionsTypes): profilePageType => {
 
@@ -41,7 +41,11 @@ export const profileReducer = (state: profilePageType = initialState, action: Pr
                 ...state,
                 posts: [...state.posts, newPost]
             }
-
+        case 'DELETE-POST':
+            return {
+                ...state,
+                posts: state.posts.filter(p => p.id != action.postId)
+            };
         case 'SET-USER-PROFILE':
             return {
                 ...state,
@@ -63,6 +67,13 @@ export const addPostAC = (newPost: string) => {
     return {
         type: 'ADD-POST',
         newPost
+    } as const
+}
+
+export const deletePostAC = (postId: string) => {
+    return {
+        type: 'DELETE-POST',
+        postId
     } as const
 }
 export const setUserProfile = (profile: any) => {

@@ -9,8 +9,11 @@ import {Textarea} from '../../common/FormsControls/Textarea';
 
 export const MyPosts = (props: PostPropsType) => {
 
+
+    console.log('RENDER')
+    console.log(props)
     let posts = props.posts.map(el => <Post message={el.message} key={el.id} likesCount={el.likeCount}/>)
-    let newPostElement = React.createRef<HTMLTextAreaElement>();
+    //let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     let onAddPost = (values: AddNewPostFormType) => {
         props.addPost(values.newPostElement)
