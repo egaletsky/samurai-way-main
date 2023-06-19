@@ -58,23 +58,23 @@ export const setAuthUserData = (id: number | null, login: string | null, email: 
     }
 }*/
 
-export const getAuthUserData = (): AppThunkType<Promise<any>> => async (dispatch) => {
-    let response = await authAPI.getAuth()
-    if (response.data.resultCode === 0) {
-        const {id, login, email} = response.data.data
-        dispatch(setAuthUserData(id, login, email, true))
-    }
-
+export const getAuthUserData = (): AppThunkType<Promise<any>> => (dispatch) => {
+    return authAPI.getAuth().then((data) => {
+        if (data.resultCode === 0) {
+            const {id, login, email} = data.data
+            dispatch(setAuthUserData(id, login, email, true))
+        }
+    })
 }
-export const login = (formData: formRegDataType): AppThunkType => async (dispatch) => {
-    let response = await authAPI.login(formData)
-    if (response.data.resultCode === 0) {
-        dispatch(getAuthUserData())
-    } else {
-        let message = response.data.messages.length > 0 ? response.data.messages[0] : 'some error'
-        dispatch(stopSubmit('login', {_error: message}))
-    }
-
+export const login = (formData: formRegDataType): AppThunkType => (dispatch) => {
+    authAPI.login(formData).then((data) => {
+        if (data.resultCode === 0) {
+            dispatch(getAuthUserData())
+        } else {
+            let message = data.messages.length > 0 ? data.messages[0] : 'some error'
+            dispatch(stopSubmit('login', {_error: message}))
+        }
+    })
 }
 export const logout = (): AppThunkType => async (dispatch) => {
     let response = await authAPI.logout()

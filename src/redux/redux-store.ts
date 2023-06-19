@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, createStore} from 'redux';
+import {applyMiddleware, combineReducers, compose, createStore, legacy_createStore} from 'redux';
 import {ProfileActionsTypes, profileReducer} from './profile-reducer';
 import {DialogActionsTypes, dialogReducer} from './dialog-reducer';
 import {sidebarReducer} from './sidebar-reducer';
@@ -29,7 +29,16 @@ type ActionsType =
 
 export type AppStateType = ReturnType<typeof rootReducer>
 
-export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
+
+// for Profiler ext
+declare global {
+    interface Window {
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    }
+}
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+export const store = legacy_createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)))
 export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, ActionsType | FormAction>
 
 
