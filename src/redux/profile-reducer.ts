@@ -90,35 +90,19 @@ export const setStatus = (status: string) => {
 }
 
 //TC
-export const getProfileTC = (userId: number) => {
-
-    return (dispatch: Dispatch) => {
-
-        profileAPI.getProfile(userId)
-            .then(response => {
-                dispatch(setUserProfile(response.data))
-            })
-    }
+export const getProfileTC = (userId: number) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.getProfile(userId)
+    dispatch(setUserProfile(response.data))
 }
-export const getStatusTC = (userId: number) => {
 
-    return (dispatch: Dispatch) => {
-
-        profileAPI.getStatus(userId)
-            .then(response => {
-                dispatch(setStatus(response.data))
-            })
-    }
+export const getStatusTC = (userId: number) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.getStatus(userId)
+    dispatch(setStatus(response.data))
 }
-export const updateStatusTC = (status: string) => {
 
-    return (dispatch: Dispatch) => {
-
-        profileAPI.updateStatus(status)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(setStatus(status))
-                }
-            })
+export const updateStatusTC = (status: string) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.updateStatus(status)
+    if (response.data.resultCode === 0) {
+        dispatch(setStatus(status))
     }
 }

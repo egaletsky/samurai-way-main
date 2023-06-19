@@ -1,0 +1,25 @@
+.usersBlock {
+}
+
+.usersBlock span {
+    cursor: pointer;
+    margin: 2px;
+}
+
+
+.userPhoto {
+    width: 100px;
+    border-radius: 50px;
+}
+
+.button {
+}
+
+.selectPageBlock {
+    flex-wrap: wrap;
+    display: flex;
+}
+
+.selectedPage {
+    font-weight: bold;
+}

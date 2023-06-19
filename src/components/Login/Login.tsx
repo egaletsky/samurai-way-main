@@ -8,11 +8,11 @@ import {LoginForm} from './LoginForm';
 import {login} from '../../redux/auth-reducer';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
-const Login = (props: LoginPropsType) => {
+const Login = ({login, isAuth, userId}: LoginPropsType) => {
     const onSubmit = (formData: formRegDataType) => {
-        props.login(formData)
+        login(formData)
     }
-    return props.isAuth ? <Redirect to={'/profile'}/> : <>
+    return isAuth ? <Redirect to={'/profile'}/> : <>
         <h1>Login</h1>
         <LoginForm onSubmit={onSubmit}/>
     </>

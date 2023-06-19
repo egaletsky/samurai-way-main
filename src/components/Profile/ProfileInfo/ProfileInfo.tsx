@@ -12,28 +12,21 @@ export type ProfileInfoType = {
     updateStatus: (status: string) => void
 }
 
-export const ProfileInfo = (props: ProfileInfoType) => {
+export const ProfileInfo = ({profile, status, updateStatus}: ProfileInfoType) => {
 
-    if (!props.profile) {
+    if (!profile) {
         return <Preloader/>
     }
 
     return (
-        <div>
-            {/*<div>*/}
-            {/*    <img*/}
-            {/*        src="https://whatifgaming.com/wp-content/uploads/2022/03/Rick-and-Morty-jumping-out-of-portal.gif"/>*/}
-            {/*</div>*/}
 
-            <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large} alt="user-photo"/>
-                <div>{props.profile.fullName}</div>
-                <div>{props.profile.contacts.facebook}</div>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
-            </div>
-
-
+        <div className={s.descriptionBlock}>
+            <img src={profile.photos.large} alt="user-photo"/>
+            <div>{profile.fullName}</div>
+            <div>{profile.contacts.facebook}</div>
+            <ProfileStatus status={status} updateStatus={updateStatus}/>
         </div>
+
     )
 }
 

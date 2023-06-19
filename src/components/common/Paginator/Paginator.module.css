@@ -1,0 +1,8 @@
+.selectPageBlock {
+    flex-wrap: wrap;
+    display: flex;
+}
+
+.selectedPage {
+    font-weight: bold;
+}

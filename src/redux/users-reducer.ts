@@ -159,44 +159,54 @@ export const toggleFollowingProgress = (isFetching: boolean, userID: number) => 
 //TC
 export const requestUsers = (page: number, pageSize: number) => {
 
-    return (dispatch: Dispatch) => {
+    return async (dispatch: Dispatch) => {
         dispatch(setIsFetching(true))
         dispatch(setCurrentPage(page))
-        usersAPI.requestUsers(page, pageSize)
-            .then(data => {
-                dispatch(setIsFetching(false))
-                dispatch(setUsers(data.items))
-                dispatch(setTotalUsersCount(data.totalCount))
-            })
+        let data = await usersAPI.requestUsers(page, pageSize)
 
+        dispatch(setIsFetching(false))
+        dispatch(setUsers(data.items))
+        dispatch(setTotalUsersCount(data.totalCount))
     }
 }
 
 export const follow = (userID: number) => {
 
-    return (dispatch: Dispatch) => {
+    return async (dispatch: Dispatch) => {
         dispatch(toggleFollowingProgress(true, userID))
-        usersAPI.follow(userID)
-            .then(data => {
-                if (data.resultCode == 0) {
-                    dispatch(followSuccess(userID))
-                }
-                dispatch(toggleFollowingProgress(false, userID))
-            })
+        let data = await usersAPI.follow(userID)
+
+        if (data.resultCode == 0) {
+            dispatch(followSuccess(userID))
+        }
+        dispatch(toggleFollowingProgress(false, userID))
+
     }
 }
 
 
 export const unfollow = (userID: number) => {
 
-    return (dispatch: Dispatch) => {
+    return async (dispatch: Dispatch) => {
         dispatch(toggleFollowingProgress(true, userID))
-        usersAPI.unfollow(userID)
-            .then(data => {
-                if (data.resultCode == 0) {
-                    dispatch(unfollowSuccess(userID))
-                }
-                dispatch(toggleFollowingProgress(false, userID))
-            })
+        let data = await usersAPI.unfollow(userID)
+
+        if (data.resultCode == 0) {
+            dispatch(unfollowSuccess(userID))
+        }
+        dispatch(toggleFollowingProgress(false, userID))
+
+    }
+}
+export type userType = {
+    id: number
+    photoUrl: string
+    name: string
+    status: string
+    location: { city: string, country: string }
+    followed: boolean
+    photos: {
+        small: string
+        large: string
     }
 }
