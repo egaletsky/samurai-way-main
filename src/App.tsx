@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import './App.css';
 import {Navbar} from './components/Navbar/Navbar';
 import {BrowserRouter, Route} from 'react-router-dom';
 
 import {AppStateType, store} from './redux/redux-store';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 
 import UsersContainer from './components/Users/UsersContainer';
@@ -16,7 +15,9 @@ import {initializeApp} from './redux/app-reducer';
 import {Music} from './components/Music/Music';
 import {News} from './components/News/News';
 import {Settings} from './components/Settings/Settings';
+import {Preloader} from './components/common/Preloader/Preloader';
 
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 
 type PropsType = mapStateToPropsType & mapDispatchToPropsType
 
@@ -39,7 +40,8 @@ class App extends React.Component<PropsType> {
                 <div className="app-wrapper-content">
 
                     <Route path={'/profile/:userId?'} render={() => <ProfileContainer/>}/>
-                    <Route path="/dialogs" render={() => <DialogsContainer/>}/>
+                    <Route path="/dialogs"
+                           render={() => <Suspense fallback={<Preloader/>}><DialogsContainer/></Suspense>}/>
                     <Route path={'/news'} render={() => <News/>}/>
                     <Route path={'/music'} render={() => <Music/>}/>
                     <Route path={'/settings'} render={() => <Settings/>}/>
