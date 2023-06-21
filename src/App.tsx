@@ -1,7 +1,7 @@
 import React, {Suspense} from 'react';
 import './App.css';
 import {Navbar} from './components/Navbar/Navbar';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {BrowserRouter, HashRouter, Route} from 'react-router-dom';
 
 import {AppStateType, store} from './redux/redux-store';
 
@@ -45,8 +45,8 @@ class App extends React.Component<PropsType> {
                     <Route path={'/news'} render={() => <News/>}/>
                     <Route path={'/music'} render={() => <Music/>}/>
                     <Route path={'/settings'} render={() => <Settings/>}/>
-                    <Route path="/users" render={() => <UsersContainer/>}/>
-                    <Route path="/login" render={() => <Login/>}/>
+                    <Route path={'/users'} render={() => <UsersContainer/>}/>
+                    <Route path={'/login'} render={() => <Login/>}/>
 
 
                 </div>
@@ -70,10 +70,10 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
 
 const AppContainer = connect(mapStateToProps, {initializeApp})(App)
 const MainApp = () => {
-    return <BrowserRouter>
+    return <HashRouter>
         <Provider store={store}>
             <AppContainer/>
         </Provider>
-    </BrowserRouter>
+    </HashRouter>
 }
 export default MainApp

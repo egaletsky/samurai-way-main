@@ -9,10 +9,9 @@ export const Navbar = () => {
             <div className={s.item}><NavLink to="/profile" className={s.activeLink}>Profile</NavLink></div>
             <div className={s.item}><NavLink to="/dialogs" className={s.activeLink}>Messages</NavLink></div>
             <div className={s.item}><NavLink to="/users" className={s.activeLink}>Users</NavLink></div>
-            <div className={s.item}><a href="/news">News</a></div>
-            <div className={s.item}><a href="/music">Music</a></div>
-            <div className={s.item}><a href="/settings">Settings</a></div>
-
+            <div className={s.item}><NavLink to="/news" className={s.activeLink}>News</NavLink></div>
+            <div className={s.item}><NavLink to="/music" className={s.activeLink}>Music</NavLink></div>
+            <div className={s.item}><NavLink to="/settings" className={s.activeLink}>Settings</NavLink></div>
         </nav>
     );
 };
