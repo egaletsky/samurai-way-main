@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, compose, createStore, legacy_createStore} from 'redux';
-import {ProfileActionsTypes, profileReducer} from './profile-reducer';
+import {PhotosType, ProfileActionsTypes, profileReducer} from './profile-reducer';
 import {DialogActionsTypes, dialogReducer} from './dialog-reducer';
 import {sidebarReducer} from './sidebar-reducer';
 import {UsersActionsTypes, usersReducer} from './users-reducer';
@@ -60,10 +60,7 @@ export type userProfileType = null | {
         youtube: string
         mainLink: string
     }
-    photos: {
-        small: string
-        large: string
-    }
+    photos: PhotosType
 }
 
 // @ts-ignore

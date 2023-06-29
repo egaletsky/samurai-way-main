@@ -5,7 +5,8 @@ import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 
 import {MyPostsContainer} from './MyPosts/MyPostsContainer';
 
-import {userProfileType} from '../../redux/redux-store';
+import {userProfileType} from 'redux/redux-store';
+import {Redirect} from 'react-router-dom';
 
 
 type PropsType = {
@@ -14,19 +15,21 @@ type PropsType = {
     status: string
     updateStatus: (newStatus: string) => void
     isAuth: boolean
+    isOwner: boolean
+    savePhoto: (formData: FormData) => void
 }
 
 
-export const Profile = (props: PropsType) => {
-
-
-    return (
-        <div className={s.content}>
-
-            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
-            <MyPostsContainer/>
-
-        </div>
-    );
-};
+export function Profile({profile, status, updateStatus, isAuth, isOwner, savePhoto}: PropsType) {
+    return !isAuth ? <Redirect to={'/login'}/> : <div>
+        <ProfileInfo
+            savePhoto={savePhoto}
+            isOwner={isOwner}
+            profile={profile}
+            status={status}
+            updateStatus={updateStatus}
+        />
+        <MyPostsContainer/>
+    </div>
+}
 

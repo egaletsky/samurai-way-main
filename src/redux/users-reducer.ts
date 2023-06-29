@@ -1,5 +1,6 @@
 import {usersAPI} from '../api/api';
 import {Dispatch} from 'redux';
+import {PhotosType} from 'redux/profile-reducer';
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
@@ -205,8 +206,5 @@ export type userType = {
     status: string
     location: { city: string, country: string }
     followed: boolean
-    photos: {
-        small: string
-        large: string
-    }
+    photos: PhotosType
 }
