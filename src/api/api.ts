@@ -1,12 +1,13 @@
 import axios from 'axios';
 import {FormProfileDataType} from 'components/Profile/ProfileInfo/ProfileDataForm/ProfileDataForm';
 
-
 export type formRegDataType = {
     email: string
     password: string
     rememberMe: boolean
+    captcha?: string
 }
+
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -33,6 +34,7 @@ export const usersAPI = {
     }
 }
 
+
 export const authAPI = {
     getAuth: () => {
         return instance.get(`auth/me`)
@@ -48,6 +50,15 @@ export const authAPI = {
             .then(res => res.data)
     }
 }
+
+export const securityAPI = {
+    getCaptchaUrl: () => {
+        return instance.get(`security/get-captcha-url`)
+            .then(res => res.data)
+    },
+
+}
+
 
 export const profileAPI = {
 
