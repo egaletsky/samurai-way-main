@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {FormProfileDataType} from 'components/Profile/ProfileInfo/ProfileDataForm/ProfileDataForm';
 
 
 export type formRegDataType = {
@@ -64,9 +65,14 @@ export const profileAPI = {
         return instance.put(`profile/status`, {status: status})
         //.then(res => res.data)
     },
-    
+
     savePhoto(formData: FormData) {
         return instance.put(`profile/photo`, formData)
+            .then(res => res.data)
+    },
+
+    updateProfile(formData: FormProfileDataType) {
+        return instance.put(`profile`, formData)
             .then(res => res.data)
     },
 }

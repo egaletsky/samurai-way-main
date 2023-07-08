@@ -1,7 +1,10 @@
 import {v1} from 'uuid';
 import {Dispatch} from 'redux';
 import {profileAPI} from 'api/api';
-import {PostsType, userProfileType} from './redux-store';
+import {AppThunkType, PostsType, userProfileType} from './redux-store';
+import {FormProfileDataType} from 'components/Profile/ProfileInfo/ProfileDataForm/ProfileDataForm';
+import {findContactsInError} from 'utils/findContactsInError';
+import {stopSubmit} from 'redux-form';
 
 export type profilePageType = {
     posts: PostsType[],
@@ -123,4 +126,14 @@ export const savePhoto = (formData: FormData) => async (dispatch: Dispatch) => {
     const data = await profileAPI.savePhoto(formData)
     if (data.resultCode === 0)
         dispatch(savePhotoSuccess(data.data.photos))
+}
+
+export const updateProfile = (formData: FormProfileDataType): AppThunkType => async (dispatch, getState) => {
+    const data = await profileAPI.updateProfile(formData)
+    if (data.resultCode === 0) await dispatch(getProfileTC(getState().auth.id || 11111))
+    else {
+        const field = findContactsInError(data.messages[0]) === 'mainlink' ? 'mainLink' : findContactsInError(data.messages[0]) as string
+        dispatch(stopSubmit('profileDataForm', {'contacts': {[field]: data.messages[0]}}))
+        return Promise.reject()
+    }
 }

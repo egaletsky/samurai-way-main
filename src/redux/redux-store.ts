@@ -49,6 +49,7 @@ export type userProfileType = null | {
     userId: number
     lookingForAJob: boolean
     lookingForAJobDescription: string
+    aboutMe: string
     fullName: string
     contacts: {
         github: string
