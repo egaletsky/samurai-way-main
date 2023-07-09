@@ -49,6 +49,7 @@ export interface UsersCItemState {
 
 class UsersContainer extends React.Component<UsersPropsType, UsersCItemState> {
 
+
     componentDidMount() {
         const {currentPage, pageSize} = this.props
         this.props.requestUsers(currentPage, pageSize)
